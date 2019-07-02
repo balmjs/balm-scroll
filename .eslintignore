@@ -1,0 +1,4 @@
+config
+.tmp
+dist
+gulpfile.js
