@@ -1,0 +1,86 @@
+.ui-scroll {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+}
+
+.ui-scroll--scroller {
+  position: absolute;
+  z-index: 1;
+  /* -webkit-touch-callout:none; */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  width: 100%;
+  padding: 0;
+}
+
+/**
+ * Pull styles
+ */
+
+.ui-scroll--pull-area {
+  background: #fff;
+  height: 40px;
+  line-height: 40px;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: gray;
+  .ui-scroll--pull-icon {
+    display: block;
+    float: left;
+    width: 40px;
+    height: 40px;
+    background: url(pull-icon@2x.png) 0 0 no-repeat;
+    background-size: 40px 80px;
+    transition-property: -webkit-transform;
+    transition-duration: 250ms;
+  }
+}
+.ui-scroll--pull-down {
+  border-bottom: 1px solid #ccc;
+}
+.ui-scroll--pull-up {
+  border-top: 1px solid #ccc;
+}
+.ui-scroll--pull-down-icon {
+  transform: rotate(0deg) translateZ(0);
+}
+.ui-scroll--pull-up-icon {
+  transform: rotate(-180deg) translateZ(0);
+}
+
+/**
+ * Pull animation effect
+ */
+.ui-scroll--pull-down.flip .ui-scroll--pull-down-icon {
+  transform: rotate(-180deg) translateZ(0);
+}
+.ui-scroll--pull-up.flip .ui-scroll--pull-down-icon {
+  transform: rotate(0deg) translateZ(0);
+}
+.ui-scroll--pull-area.loading {
+  .ui-scroll--pull-down-icon,
+  .ui-scroll--pull-down-icon {
+    background-position: 0 100%;
+    transform: rotate(0deg) translateZ(0);
+    transition-duration: 0;
+
+    animation-name: loading;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg) translateZ(0);
+  }
+  to {
+    transform: rotate(360deg) translateZ(0);
+  }
+}

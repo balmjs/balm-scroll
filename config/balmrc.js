@@ -19,7 +19,7 @@ module.exports = {
           app: './docs/scripts/main.js'
         }
       : {
-          'balm-scroll': './src/index.js'
+          'balm-scroll': './src/scripts/index.js'
         },
     library: 'BalmScroll',
     libraryTarget: 'umd',
@@ -37,7 +37,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, '../docs/scripts'),
-      '@src': path.resolve(__dirname, '../src')
+      '@src': path.resolve(__dirname, '../src/scripts')
     },
     eslint: true,
     options: {
@@ -47,5 +47,6 @@ module.exports = {
     },
     include: env.useDocs ? [path.resolve(__dirname, '../src/scripts')] : []
   },
-  cache: env.buildDocs
+  cache: env.buildDocs,
+  useDefault: env.useDefault
 };
