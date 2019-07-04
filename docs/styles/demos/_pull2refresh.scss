@@ -1,0 +1,13 @@
+.demo--pull2refresh {
+  #datalist li {
+    height: 200px;
+    padding: 20px 40px;
+    img {
+      height: 120px;
+    }
+    &:nth-child(odd) {
+      background: black;
+      color: white;
+    }
+  }
+}

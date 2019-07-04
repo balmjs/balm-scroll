@@ -1,11 +1,42 @@
-.ui-scroll {
+$ui-scroll-top-bar-height: 0 !default;
+$ui-scroll-bottom-bar-height: 0 !default;
+
+// .ui-scroll {
+//   position: fixed;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+// }
+
+// .ui-scroll--header,
+// .ui-scroll--footer {
+//   position: absolute;
+//   z-index: 2;
+//   right: 0;
+//   left: 0;
+//   width: 100%;
+// }
+
+// .ui-scroll--header {
+//   top: 0;
+//   height: $ui-scroll-top-bar-height;
+// }
+
+// .ui-scroll--footer {
+//   bottom: 0;
+//   height: $ui-scroll-bottom-bar-height;
+// }
+
+.ui-scroll--wrapper {
   position: absolute;
   z-index: 1;
-  top: 0;
-  bottom: 0;
+  top: $ui-scroll-top-bar-height;
+  right: 0;
+  bottom: $ui-scroll-bottom-bar-height;
   left: 0;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .ui-scroll--scroller {
@@ -25,7 +56,7 @@
   background: #fff;
   height: 40px;
   line-height: 40px;
-  padding: 5px 10px;
+  padding: 0 10px;
   font-weight: bold;
   font-size: 14px;
   color: gray;
@@ -34,7 +65,7 @@
     float: left;
     width: 40px;
     height: 40px;
-    background: url(pull-icon@2x.png) 0 0 no-repeat;
+    background: url(../images/pull-icon@2x.png) 0 0 no-repeat;
     background-size: 40px 80px;
     transition-property: -webkit-transform;
     transition-duration: 250ms;
@@ -59,12 +90,12 @@
 .ui-scroll--pull-down.flip .ui-scroll--pull-down-icon {
   transform: rotate(-180deg) translateZ(0);
 }
-.ui-scroll--pull-up.flip .ui-scroll--pull-down-icon {
+.ui-scroll--pull-up.flip .ui-scroll--pull-up-icon {
   transform: rotate(0deg) translateZ(0);
 }
 .ui-scroll--pull-area.loading {
   .ui-scroll--pull-down-icon,
-  .ui-scroll--pull-down-icon {
+  .ui-scroll--pull-up-icon {
     background-position: 0 100%;
     transform: rotate(0deg) translateZ(0);
     transition-duration: 0;

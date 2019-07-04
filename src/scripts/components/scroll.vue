@@ -1,21 +1,21 @@
 <template>
-  <div class="ui-scroll">
+  <div class="ui-scroll ui-scroll--wrapper">
     <div class="ui-scroll--scroller">
-      <div ref="pullDown" class="ui-scroll--pull-area ui-scroll--pull-down">
+      <div v-if="pullDownAction" ref="pullDown" class="ui-scroll--pull-area ui-scroll--pull-down">
         <span class="ui-scroll--pull-icon ui-scroll--pull-down-icon">
           <slot name="pullDownIcon"></slot>
         </span>
         <span ref="pullDownLabel" class="ui-scroll--pull-label ui-scroll--pull-down-label">
-          <slot name="pullDownLabel">Pull down to refresh...</slot>
+          <slot name="pullDownLabel">{{ pullDownLabel }}</slot>
         </span>
       </div>
       <slot></slot>
-      <div ref="pullUp" class="ui-scroll--pull-area ui-scroll--pull-up">
+      <div v-if="pullUpAction" ref="pullUp" class="ui-scroll--pull-area ui-scroll--pull-up">
         <span class="ui-scroll--pull-icon ui-scroll--pull-up-icon">
           <slot name="pullUpIcon"></slot>
         </span>
         <span ref="pullUpLabel" class="ui-scroll--pull-label ui-scroll--pull-up-label">
-          <slot name="pullUpLabel">Pull up to load more...</slot>
+          <slot name="pullUpLabel">{{ pullUpLabel }}</slot>
         </span>
       </div>
     </div>
@@ -26,7 +26,13 @@
 import iScroll from '../../iscroll/iscroll-probe';
 import isPassive from './utils';
 
-const DEV = true;
+const UI_SCROLL = {
+  isDev: false,
+  className: {
+    flip: 'flip',
+    loading: 'loading'
+  }
+};
 
 export default {
   name: 'ui-scroll',
@@ -37,13 +43,27 @@ export default {
         return {};
       }
     },
-    pullDownAction: {
-      type: Function,
-      default() {}
+    pullDownLabel: {
+      type: String,
+      default: 'Pull down to refresh' // 下拉刷新
     },
-    pullUpAction: {
-      type: Function,
-      default() {}
+    pullUpLabel: {
+      type: String,
+      default: 'Pull up to load more' // 上拉加载更多
+    },
+    releaseLabel: {
+      type: String,
+      default: 'Release to update' // 释放更新
+    },
+    loadingLabel: {
+      type: String,
+      default: 'Loading...' // 加载中
+    },
+    pullDownAction: Function,
+    pullUpAction: Function,
+    refreshTimeout: {
+      type: Number,
+      default: 1e3
     }
   },
   data() {
@@ -60,14 +80,19 @@ export default {
     };
   },
   mounted() {
-    this.pullDownEl = this.$refs.pullDown;
-    this.pullDownLabelEl = this.$refs.pullDownLabel;
-    this.pullDownOffset = this.pullDownEl.offsetHeight;
-    this.pullUpEl = this.$refs.pullUp;
-    this.pullUpLabelEl = this.$refs.pullUpLabel;
-    this.pullUpOffset = this.pullUpEl.offsetHeight;
+    if (this.pullDownAction) {
+      this.pullDownEl = this.$refs.pullDown;
+      this.pullDownLabelEl = this.$refs.pullDownLabel;
+      this.pullDownOffset = this.pullDownEl.offsetHeight;
+    }
+    if (this.pullUpAction) {
+      this.pullUpEl = this.$refs.pullUp;
+      this.pullUpLabelEl = this.$refs.pullUpLabel;
+      this.pullUpOffset = this.pullUpEl.offsetHeight;
+    }
 
-    if (DEV) {
+    if (UI_SCROLL.isDev) {
+      console.log('--------mounted--------');
       console.log(`pullDownOffset: ${this.pullDownOffset}`);
       console.log(`pullUpOffset: ${this.pullUpOffset}`);
     }
@@ -78,16 +103,18 @@ export default {
         Object.assign(
           {
             probeType: 1,
-            startY: -this.pullDownOffset
+            startY: this.pullDownAction ? -this.pullDownOffset : 0
           },
           this.options
         )
       );
 
-      DEV && console.log(`maxScrollY-1: ${this.myScroll.maxScrollY}`);
+      UI_SCROLL.isDev &&
+        console.log(`maxScrollY-1: ${this.myScroll.maxScrollY}`);
       this.myScroll.maxScrollY += this.pullUpOffset;
       this.currentMaxScrollY = this.myScroll.maxScrollY;
-      DEV && console.log(`maxScrollY-2: ${this.myScroll.maxScrollY}`);
+      UI_SCROLL.isDev &&
+        console.log(`maxScrollY-2: ${this.myScroll.maxScrollY}`);
 
       this.myScroll.on('scrollStart', this.onScrollStart);
       this.myScroll.on('scroll', this.onScroll);
@@ -110,11 +137,13 @@ export default {
   },
   methods: {
     onScrollStart() {
-      console.log('onScrollStart');
       if (this.myScroll.y == this.myScroll.startY) {
         this.isScrolling = true;
       }
-      console.log('start-y:' + this.myScroll.y);
+      if (UI_SCROLL.isDev) {
+        console.log('--------onScrollStart--------');
+        console.log(`start-y: ${this.myScroll.y}`);
+      }
     },
     onScroll() {
       let currentY = this.myScroll.y;
@@ -122,102 +151,129 @@ export default {
       if (
         currentY >= 5 &&
         this.pullDownEl &&
-        !this.pullDownEl.classList.contains('flip')
+        !this.pullDownEl.classList.contains(UI_SCROLL.className.flip)
       ) {
-        this.pullDownEl.classList.add('flip');
-        this.pullDownLabelEl.innerHTML = 'Release to refresh...';
+        this.pullDownEl.classList.add(UI_SCROLL.className.flip);
+        this.pullDownLabelEl.innerHTML = this.releaseLabel;
       } else if (
         currentY < 5 &&
         this.pullDownEl &&
-        this.pullDownEl.classList.contains('flip')
+        this.pullDownEl.classList.contains(UI_SCROLL.className.flip)
       ) {
-        this.pullDownEl.classList.remove('flip');
-        this.pullDownLabelEl.innerHTML = 'Pull down to refresh...';
+        this.pullDownEl.classList.remove(UI_SCROLL.className.flip);
+        this.pullDownLabelEl.innerHTML = this.pullDownLabel;
       } else if (
         currentY <= this.currentMaxScrollY - this.pullUpOffset &&
         this.pullUpEl &&
-        !this.pullUpEl.classList.contains('flip')
+        !this.pullUpEl.classList.contains(UI_SCROLL.className.flip)
       ) {
-        this.pullUpEl.classList.add('flip');
-        this.pullUpLabelEl.innerHTML = 'Release to refresh...';
+        this.pullUpEl.classList.add(UI_SCROLL.className.flip);
+        this.pullUpLabelEl.innerHTML = this.releaseLabel;
         this.myScroll.maxScrollY -= this.pullUpOffset;
       } else if (
         currentY > this.currentMaxScrollY - this.pullUpOffset &&
         this.pullUpEl &&
-        this.pullUpEl.classList.contains('flip')
+        this.pullUpEl.classList.contains(UI_SCROLL.className.flip)
       ) {
-        this.pullUpEl.classList.remove('flip');
-        this.pullUpLabel.innerHTML = 'Pull up to load more...';
+        this.pullUpEl.classList.remove(UI_SCROLL.className.flip);
+        this.pullUpLabel.innerHTML = this.pullUpLabel;
         this.myScroll.maxScrollY += this.pullUpOffset;
       }
 
-      console.log('onScroll y:' + this.myScroll.y);
+      if (UI_SCROLL.isDev) {
+        console.log('--------onScroll--------');
+        console.log(`onScroll y: ${this.myScroll.y}`);
+      }
     },
     onScrollEnd() {
-      console.log('onScrollEnd');
-      console.log('directionY:' + this.myScroll.directionY);
-      console.log('y1:' + this.myScroll.y);
-      console.log('maxScrollY-3:' + this.myScroll.maxScrollY);
+      if (UI_SCROLL.isDev) {
+        console.log('--------onScrollEnd--------');
+        console.log(`directionY: ${this.myScroll.directionY}`);
+        console.log(`y1: ${this.myScroll.y}`);
+        console.log(`maxScrollY-3: ${this.myScroll.maxScrollY}`);
+      }
 
       if (
         this.pullDownEl &&
-        !this.pullDownEl.classList.contains('flip') &&
+        !this.pullDownEl.classList.contains(UI_SCROLL.className.flip) &&
         this.myScroll.y > this.myScroll.options.startY
       ) {
-        console.log('resume');
+        UI_SCROLL.isDev && console.log('resume');
         this.myScroll.scrollTo(0, this.myScroll.options.startY, 800);
       } else if (
         this.pullDownEl &&
-        this.pullDownEl.classList.contains('flip')
+        this.pullDownEl.classList.contains(UI_SCROLL.className.flip)
       ) {
-        this.pullDownEl.classList.add('loading');
-        this.pullDownLabelEl.innerHTML = 'Loading...';
-        if (this.isScrolling) {
-          console.log('before pull down action:' + this.myScroll.y);
+        this.pullDownEl.classList.add(UI_SCROLL.className.loading);
+        this.pullDownLabelEl.innerHTML = this.loadingLabel;
+
+        if (this.isScrolling && this.pullDownAction) {
+          UI_SCROLL.isDev &&
+            console.log(`before pull down action: ${this.myScroll.y}`);
+
           setTimeout(() => {
             this.pullDownAction();
             this.$nextTick(() => {
               this.myScroll && this.myScroll.refresh();
             });
-          }, 1000);
-          console.log('after pull down action:' + this.myScroll.y);
+          }, this.refreshTimeout);
+
+          UI_SCROLL.isDev &&
+            console.log(`after pull down action: ${this.myScroll.y}`);
         }
-      } else if (this.pullUpEl && this.pullUpEl.classList.contains('flip')) {
-        console.log('pull up loading');
-        this.pullUpEl.classList.add('loading');
-        this.pullUpLabelEl.innerHTML = 'Loading...';
-        if (this.isScrolling) {
-          console.log('before pull up action:' + this.myScroll.y);
+      } else if (
+        this.pullUpEl &&
+        this.pullUpEl.classList.contains(UI_SCROLL.className.flip)
+      ) {
+        UI_SCROLL.isDev && console.log('pull up loading');
+        this.pullUpEl.classList.add(UI_SCROLL.className.loading);
+        this.pullUpLabelEl.innerHTML = this.loadingLabel;
+
+        if (this.isScrolling && this.pullUpAction) {
+          UI_SCROLL.isDev &&
+            console.log('before pull up action:' + this.myScroll.y);
+
           setTimeout(() => {
             this.pullUpAction();
             this.$nextTick(() => {
               this.myScroll && this.myScroll.refresh();
             });
-          }, 1000);
-          console.log('after pull up action:' + this.myScroll.y);
+          }, this.refreshTimeout);
+
+          UI_SCROLL.isDev &&
+            console.log('after pull up action:' + this.myScroll.y);
         }
       }
       this.isScrolling = false;
     },
     onRefresh() {
-      console.log('onRefresh');
-      console.log('maxScrollY-4:' + this.myScroll.maxScrollY);
+      if (UI_SCROLL.isDev) {
+        console.log('--------onRefresh--------');
+        console.log('maxScrollY-4:' + this.myScroll.maxScrollY);
+      }
       this.myScroll.maxScrollY += this.pullUpOffset;
       this.currentMaxScrollY = this.myScroll.maxScrollY;
-      console.log('maxScrollY-5:' + this.myScroll.maxScrollY);
+      UI_SCROLL.isDev &&
+        console.log('maxScrollY-5:' + this.myScroll.maxScrollY);
 
-      if (this.pullDownEl && this.pullDownEl.classList.contains('loading')) {
-        this.pullDownEl.classList.remove('loading');
-        this.pullDownEl.classList.remove('flip');
-        this.pullDownLabelEl.innerHTML = 'Pull down to refresh...';
+      if (
+        this.pullDownEl &&
+        this.pullDownEl.classList.contains(UI_SCROLL.className.loading)
+      ) {
+        this.pullDownEl.classList.remove(UI_SCROLL.className.loading);
+        this.pullDownEl.classList.remove(UI_SCROLL.className.flip);
+        this.pullDownLabelEl.innerHTML = this.pullDownLabel;
         this.myScroll.scrollTo(0, this.myScroll.options.startY, 0);
-      } else if (this.pullUpEl && this.pullUpEl.classList.contains('loading')) {
-        this.pullUpEl.classList.remove('loading');
-        this.pullUpEl.classList.remove('flip');
-        this.pullUpLabelEl.innerHTML = 'Pull up to load more...';
+      } else if (
+        this.pullUpEl &&
+        this.pullUpEl.classList.contains(UI_SCROLL.className.loading)
+      ) {
+        this.pullUpEl.classList.remove(UI_SCROLL.className.loading);
+        this.pullUpEl.classList.remove(UI_SCROLL.className.flip);
+        this.pullUpLabelEl.innerHTML = this.pullUpLabel;
       }
 
-      console.log('refresh finished!');
+      UI_SCROLL.isDev && console.log('refresh finished!');
     }
   }
 };

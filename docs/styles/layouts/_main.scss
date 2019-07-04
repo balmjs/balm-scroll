@@ -7,3 +7,28 @@
 .demo-main {
   display: flex;
 }
+
+.balm-scroll--header,
+.balm-scroll--footer {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+}
+
+.balm-scroll--header {
+  top: 0;
+  height: 64px;
+}
+
+.balm-scroll--footer {
+  bottom: 0;
+  height: 64px;
+}
+
+.ui-scroll {
+  top: 64px;
+  bottom: 64px;
+}
