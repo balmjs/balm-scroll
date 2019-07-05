@@ -1,0 +1,11 @@
+.demo--infinite {
+  .ui-scroll--scroller {
+    transform: translateZ(0);
+    ul {
+      position: relative;
+    }
+    li {
+      transform: translateZ(0);
+    }
+  }
+}

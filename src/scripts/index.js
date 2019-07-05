@@ -1,15 +1,18 @@
 import autoInstall from './config/auto-install';
 import UiScroll from './components/scroll';
-// import UiScrollLite from './components/scroll-lite';
+import UiScrollLite from './components/scroll-lite';
 import UiScrollProbe from './components/scroll-probe';
-// import UiScrollZoom from './components/scroll-zoom';
-// import UiScrollInfinite from './components/scroll-infinite';
+import UiScrollZoom from './components/scroll-zoom';
+import UiScrollInfinite from './components/scroll-infinite';
 
 const version = require('../../package.json').version;
 
 const components = {
   UiScroll,
-  UiScrollProbe
+  UiScrollLite,
+  UiScrollProbe,
+  UiScrollZoom,
+  UiScrollInfinite
 };
 
 const BalmScroll = {

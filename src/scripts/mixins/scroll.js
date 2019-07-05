@@ -87,6 +87,10 @@ export default {
         : false
     );
   },
+  beforeDestroy() {
+    this.$scroll.destroy();
+    this.$scroll = null;
+  },
   methods: {
     _isPullDown(className, LogicalNot = false) {
       return (
@@ -159,8 +163,8 @@ export default {
 
       if (UI_SCROLL.isDev) {
         console.log('--------onScrollEnd--------');
-        console.log(`directionY: ${this.$scroll.directionY}`);
-        console.log(`y1: ${currentY}`);
+        console.log(`current position: ${currentY}`);
+        console.log(`last direction: ${this.$scroll.directionY}`);
         console.log(`maxScrollY: ${this.$scroll.maxScrollY}`);
       }
 

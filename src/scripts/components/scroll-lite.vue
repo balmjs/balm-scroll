@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-scroll ui-scroll--wrapper">
+  <div class="ui-scroll-lite ui-scroll--wrapper">
     <div class="ui-scroll--scroller">
       <slot></slot>
     </div>
@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import iScroll from '../../iscroll/iscroll';
+import iScroll from '../../iscroll/iscroll-lite';
 import scrollMixin from '../mixins/scroll';
 
 export default {

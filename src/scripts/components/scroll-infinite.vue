@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-scroll ui-scroll--wrapper">
+  <div class="ui-scroll-infinite ui-scroll--wrapper">
     <div class="ui-scroll--scroller">
       <slot></slot>
     </div>
@@ -7,16 +7,23 @@
 </template>
 
 <script>
-import iScroll from '../../iscroll/iscroll';
+import iScroll from '../../iscroll/iscroll-infinite';
 import scrollMixin from '../mixins/scroll';
 
 export default {
-  name: 'ui-scroll',
+  name: 'ui-scroll-infinite',
   mixins: [scrollMixin],
   mounted() {
     this.$nextTick(() => {
       this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));
     });
+  },
+  methods: {
+    updateCache(start, data) {
+      this.$nextTick(() => {
+        this.$scroll.updateCache(start, data);
+      });
+    }
   }
 };
 </script>
