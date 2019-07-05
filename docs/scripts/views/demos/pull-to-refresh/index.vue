@@ -1,7 +1,7 @@
 <template>
   <div class="demo--pull2refresh">
     <header class="balm-scroll--header">Balm Scroll</header>
-    <ui-scroll :pullDownAction="pullDownAction" :pullUpAction="pullUpAction">
+    <ui-scroll-probe :pullDownAction="pullDownAction" :pullUpAction="pullUpAction">
       <ul id="datalist">
         <li v-for="i in list" :key="i">
           <figure>
@@ -11,7 +11,7 @@
         </li>
       </ul>
       <template #footer>Thx BalmJS</template>
-    </ui-scroll>
+    </ui-scroll-probe>
     <footer class="balm-scroll--footer">Thx BalmJS</footer>
   </div>
 </template>

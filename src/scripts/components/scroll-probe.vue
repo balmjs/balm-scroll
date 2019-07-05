@@ -23,20 +23,32 @@
 </template>
 
 <script>
-import iScroll from '../../iscroll/iscroll';
+import iScroll from '../../iscroll/iscroll-probe';
 import scrollMixin from '../mixins/scroll';
 
 export default {
-  name: 'ui-scroll',
+  name: 'ui-scroll-probe',
   mixins: [scrollMixin],
   mounted() {
     this.$nextTick(() => {
-      this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));
+      this.$scroll = new iScroll(
+        this.$el,
+        Object.assign(
+          {
+            probeType: 1,
+            startY: this.pullDownAction ? -this.pullDownOffset : 0
+          },
+          this.options
+        )
+      );
 
+      // console.log(`before maxScrollY: ${this.$scroll.maxScrollY}`);
       this.$scroll.maxScrollY += this.pullUpOffset;
       this.currentMaxScrollY = this.$scroll.maxScrollY;
+      // console.log(`after maxScrollY: ${this.$scroll.maxScrollY}`);
 
       this.$scroll.on('scrollStart', this.onScrollStart);
+      this.$scroll.on('scroll', this.onScroll);
       this.$scroll.on('scrollEnd', this.onScrollEnd);
       this.$scroll.on('refresh', this.onRefresh);
     });
