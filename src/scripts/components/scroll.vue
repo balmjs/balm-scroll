@@ -32,13 +32,6 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));
-
-      this.$scroll.maxScrollY += this.pullUpOffset;
-      this.currentMaxScrollY = this.$scroll.maxScrollY;
-
-      this.$scroll.on('scrollStart', this.onScrollStart);
-      this.$scroll.on('scrollEnd', this.onScrollEnd);
-      this.$scroll.on('refresh', this.onRefresh);
     });
   }
 };
