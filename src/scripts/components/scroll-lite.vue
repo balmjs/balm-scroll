@@ -11,7 +11,7 @@ import iScroll from '../../iscroll/iscroll-lite';
 import scrollMixin from '../mixins/scroll';
 
 export default {
-  name: 'ui-scroll',
+  name: 'ui-scroll-lite',
   mixins: [scrollMixin],
   mounted() {
     this.$nextTick(() => {

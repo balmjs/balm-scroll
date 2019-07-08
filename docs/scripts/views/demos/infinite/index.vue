@@ -3,7 +3,7 @@
     <header class="balm-scroll--header">Balm Scroll</header>
     <ui-scroll-infinite ref="iScroll" id="scroller" :options="options">
       <ul>
-        <li v-for="i in list" :key="i" class="row">Row {{ i }}</li>
+        <li v-for="i in list" :key="i" class="row">{{ i }}</li>
       </ul>
     </ui-scroll-infinite>
     <footer class="balm-scroll--footer">Thx BalmJS</footer>
@@ -14,14 +14,14 @@
 export default {
   data() {
     return {
-      list: 0,
+      list: 30, // NOTE: tpl count
       options: {
         mouseWheel: true,
         infiniteElements: '#scroller .row',
         //infiniteLimit: 2000,
         dataset: this.requestData,
         dataFiller: this.updateContent,
-        cacheSize: 1000
+        cacheSize: 100
       }
     };
   },
@@ -29,8 +29,9 @@ export default {
     requestData(start, count) {
       console.log('requestData', start, count);
 
+      // TODO: get data by API
       let datalist = [];
-      for (let i = start + 1; i <= count; i++) {
+      for (let i = start + 1; i <= start + count; i++) {
         datalist.push(`Row ${i}`);
       }
 
@@ -40,8 +41,6 @@ export default {
       console.log('updateContent', el, data);
 
       el.innerHTML = data;
-
-      // this.$refs.iScroll.refresh();
     }
   }
 };

@@ -5,6 +5,10 @@
       position: relative;
     }
     li {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
       transform: translateZ(0);
     }
   }
