@@ -32,6 +32,7 @@ export default {
       type: String,
       default: 'Loading...' // 加载中
     },
+    pullAction: Function,
     pullDownAction: Function,
     pullUpAction: Function,
     pullDownY: {
@@ -157,6 +158,10 @@ export default {
         this.pullUpLabelEl.innerHTML = this.releaseLabel;
         this.$scroll.maxScrollY -= this.pullUpOffset;
       }
+
+      if (this.isScrolling && this.pullAction) {
+        this.pullAction(this.$scroll);
+      }
     },
     onScrollEnd() {
       let currentY = this.$scroll.y;
@@ -187,7 +192,7 @@ export default {
             console.log(`before pull down action: ${currentY}`);
 
           setTimeout(() => {
-            this.pullDownAction();
+            this.pullDownAction(this.$scroll);
             this.refresh();
           }, this.refreshTimeout);
 
@@ -202,7 +207,7 @@ export default {
           UI_SCROLL.isDev && console.log(`before pull up action: ${currentY}`);
 
           setTimeout(() => {
-            this.pullUpAction();
+            this.pullUpAction(this.$scroll);
             this.refresh();
           }, this.refreshTimeout);
 

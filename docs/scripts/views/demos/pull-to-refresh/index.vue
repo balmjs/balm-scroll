@@ -10,7 +10,6 @@
           </figure>
         </li>
       </ul>
-      <template #footer>Thx BalmJS</template>
     </ui-scroll-probe>
     <footer class="balm-scroll--footer">Thx BalmJS</footer>
   </div>
