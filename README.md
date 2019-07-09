@@ -8,7 +8,13 @@ iScroll + Vue.js
 
 ## 1. Usage
 
-### 1.1 Edit `my-project/app/scripts/main.js`
+### 1.1 Css (Edit `my-project/app/styles/global/_vendor.scss`)
+
+```css
+@import 'node_modules/balm-scroll/src/styles/balm-scroll.scss';
+```
+
+### 1.2 Js (Edit `my-project/app/scripts/main.js`)
 
 ```js
 import Vue from 'vue';
@@ -17,7 +23,7 @@ import BalmScroll from 'balm-scroll';
 Vue.use(BalmScroll);
 ```
 
-### 1.2 Edit a vue component: `my-project/app/scripts/views/demos/hello.vue`
+### 1.3 Vue (Edit a vue component: `my-project/app/scripts/views/demos/hello.vue`)
 
 ```html
 <template>
