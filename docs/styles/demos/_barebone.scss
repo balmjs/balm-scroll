@@ -1,0 +1,17 @@
+.demo--barebone {
+  .ui-scroll--wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    /* Prevent native touch events on Windows */
+    -ms-touch-action: none;
+    /* Prevent the callout on tap-hold and text selection */
+    user-select: none;
+    /* Prevent text resize on orientation change, useful for web-apps */
+    text-size-adjust: none;
+  }
+  .ui-scroll--scroller {
+    /* Put the scroller into the HW Compositing layer right from the start */
+    transform: translateZ(0);
+  }
+}
