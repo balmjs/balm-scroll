@@ -1,11 +1,47 @@
-.container {
-  display: flex;
-  height: 100vh;
-  font-size: rem(14);
+a {
+  color: $mdc-theme-primary;
 }
 
-.demo-main {
+.balmui-container {
+  height: 100vh;
+  font-size: 14px;
+}
+
+.mdc-top-app-bar__title {
+  font-size: 20px;
+}
+
+.balmui-body {
   display: flex;
+  height: 100%;
+}
+
+.balmui-menu {
+  position: static;
+  z-index: 0;
+}
+
+.balmui-menu .mdc-drawer__content,
+.balmui-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.balmui-content {
+  position: relative;
+  flex: 1;
+}
+
+.catalog-list {
+  h3 {
+    padding: 0 rem(12);
+    font-size: 18px;
+    line-height: 1;
+  }
+  .mdc-list-item {
+    font-size: 14px;
+    padding-left: 40px;
+  }
 }
 
 .balm-scroll--header,
@@ -20,7 +56,7 @@
 
 .balm-scroll--header {
   top: 0;
-  height: 64px;
+  height: rem(64);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +68,11 @@
 }
 
 .balm-scroll--footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   bottom: 0;
-  height: 64px;
+  height: rem(64);
   background: #444;
   color: white;
   border-top: 1px solid #444;
@@ -41,9 +80,10 @@
 
 .ui-scroll,
 .ui-scroll-probe,
-.ui-scroll-infinite {
-  top: 64px;
-  bottom: 64px;
+.ui-scroll-infinite,
+.ui-scroll-lite {
+  top: rem(64);
+  bottom: rem(64);
 }
 
 .ui-scroll--wrapper {

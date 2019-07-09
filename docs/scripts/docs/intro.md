@@ -1,6 +1,4 @@
-# Balm Scroll
-
-> Smooth scrolling for Vue.js
+# Introduction
 
 ## 0. What is BalmScroll?
 

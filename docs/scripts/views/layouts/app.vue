@@ -1,38 +1,43 @@
 <template>
-  <div class="container">
+  <div class="balmui-container">
     <template v-if="noLayout">
       <router-view></router-view>
     </template>
     <template v-else>
-      <ui-top-app-bar contentSelector=".demo-main">Balm Scroll</ui-top-app-bar>
-
-      <main class="demo-main">
-        <ui-permanent-drawer>
-          <ui-drawer-header>
-            <ui-drawer-title>标题</ui-drawer-title>
-          </ui-drawer-header>
+      <!-- header -->
+      <ui-top-app-bar class="balmui-head" contentSelector=".balmui-body" navId="balmui-menu">
+        <router-link to="/" :class="['catalog-title', $themeColor('on-primary')]">Balm Scroll</router-link>
+        <template #toolbar="{ itemClass }">
+          <a :class="itemClass" href="https://github.com/balmjs/balm-scroll">
+            <svg-github></svg-github>
+          </a>
+        </template>
+      </ui-top-app-bar>
+      <!-- content -->
+      <main class="balmui-body">
+        <ui-dismissible-drawer v-model="open" class="balmui-menu" menuSelector="#balmui-menu">
           <ui-drawer-content>
-            demos
-            <!-- <ui-list-nav>
-            <template v-for="(item, index) in menu">
-              <ui-list-divider v-if="item === '-'" :key="`divider-${index}`"></ui-list-divider>
-              <template v-else>
-                <ui-list-group-subheader
-                  v-if="item.subheader"
-                  :key="`subheader-${index}`"
-                >{{ item.subheader }}</ui-list-group-subheader>
-                <ui-item-a
-                  v-for="(subItem, subIndex) in item.items"
-                  :key="`item-${index}-${subIndex}`"
-                  :firstIcon="subItem.icon"
-                >{{ subItem.name }}</ui-item-a>
+            <ui-list-nav class="catalog-list">
+              <template #default="{ itemClass, activeClass }">
+                <h3 :class="$textColor('primary', 'light')">Guide</h3>
+                <router-link
+                  :class="[itemClass, $textColor('primary', 'light')]"
+                  to="/"
+                >Introduction</router-link>
+                <h3 :class="$textColor('primary', 'light')">Demos</h3>
+                <template v-for="(item, index) in menu">
+                  <router-link
+                    :key="`item${index}`"
+                    :class="[itemClass, $textColor('primary', 'light')]"
+                    :to="{ name: item.name }"
+                  >{{ item.path }}</router-link>
+                </template>
               </template>
-            </template>
-            </ui-list-nav>-->
+            </ui-list-nav>
           </ui-drawer-content>
-        </ui-permanent-drawer>
+        </ui-dismissible-drawer>
 
-        <div :class="[$tt('body1'), 'demo-content']">
+        <div :class="[$tt('body1'), 'balmui-content']">
           <div :class="$tt('body2')">
             <router-view></router-view>
           </div>
@@ -43,11 +48,30 @@
 </template>
 
 <script>
+import SvgGithub from '@/components/github';
+import menu from '@/routes/demos';
+
 export default {
+  components: {
+    SvgGithub
+  },
+  data() {
+    return {
+      menu,
+      open: false
+    };
+  },
   computed: {
     noLayout() {
       return /^demos.*/.test(this.$route.name);
     }
+  },
+  mounted() {
+    this.open = window.innerWidth >= 1024;
+
+    window.addEventListener('balmResize', () => {
+      this.open = window.innerWidth >= 1024;
+    });
   }
 };
 </script>

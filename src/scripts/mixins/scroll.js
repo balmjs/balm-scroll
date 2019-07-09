@@ -32,13 +32,13 @@ export default {
       type: String,
       default: 'Loading...' // 加载中
     },
-    pullAction: Function,
-    pullDownAction: Function,
-    pullUpAction: Function,
     pullDownY: {
       type: Number,
       default: 5
     },
+    pullAction: Function,
+    pullDownAction: Function,
+    pullUpAction: Function,
     refreshTimeout: {
       type: Number,
       default: 1e3
@@ -151,7 +151,7 @@ export default {
         this.pullDownLabelEl.innerHTML = this.releaseLabel;
       } else if (pullUp) {
         this.pullUpEl.classList.remove(UI_SCROLL.className.flip);
-        this.pullUpLabel.innerHTML = this.pullUpLabel;
+        this.pullUpLabelEl.innerHTML = this.pullUpLabel;
         this.$scroll.maxScrollY += this.pullUpOffset;
       } else if (pullUpToLoadMore) {
         this.pullUpEl.classList.add(UI_SCROLL.className.flip);

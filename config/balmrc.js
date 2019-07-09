@@ -47,6 +47,9 @@ module.exports = {
     },
     include: env.useDocs ? [path.resolve(__dirname, '../src/scripts')] : []
   },
+  assets: {
+    publicUrl: env.buildDocs ? '//iscroll.balmjs.com/' : ''
+  },
   cache: env.buildDocs,
   useDefault: env.useDefault
 };

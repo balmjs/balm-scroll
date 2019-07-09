@@ -1,11 +1,19 @@
 <template>
   <div :class="[$tt('body1'), 'demo--home']">
-    <section class="hero" v-ripple.unbounded>
-      <h3 :class="$tt('headline3')">BalmScroll</h3>
-    </section>
     <div :class="[$tt('body2'), 'pure-docs']">
-      <p :class="$tt('headline6')">Next Generation Material UI for Vue.js</p>
-      <!-- <ui-button raised @click="$router.push({'name': 'guide.intro'})">Get Started</ui-button> -->
+      <ui-markdown :text="docs"></ui-markdown>
     </div>
   </div>
 </template>
+
+<script>
+import docs from '@/docs/intro.md';
+
+export default {
+  data() {
+    return {
+      docs
+    };
+  }
+};
+</script>

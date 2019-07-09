@@ -1,14 +1,14 @@
 <template>
   <div class="demo--simple">
     <header class="balm-scroll--header">Balm Scroll: simple</header>
-    <ui-scroll ref="iScroll" :options="options">
+    <ui-scroll-lite ref="iScroll" :options="options">
       <ul>
         <li v-for="i in list" :key="i">Pretty row {{ i }}</li>
       </ul>
       <!-- <p>
         <ui-button @click="loadMore">Get More</ui-button>
       </p>-->
-    </ui-scroll>
+    </ui-scroll-lite>
     <footer class="balm-scroll--footer">Thx BalmJS</footer>
   </div>
 </template>
