@@ -25,6 +25,22 @@ balm.go(mix => {
       );
       // get fonts for docs
       mix.copy('node_modules/balm-ui/fonts/*', 'docs/fonts');
+    } else {
+      if (balm.config.isProd) {
+        // clear individual
+        mix.remove(['./components']);
+        // build individual
+        let buildFiles = [
+          'scroll',
+          'scroll-lite',
+          'scroll-probe',
+          'scroll-zoom',
+          'scroll-infinite'
+        ].map(item => {
+          return `./src/scripts/components/${item}.js`;
+        });
+        mix.js(buildFiles, './components');
+      }
     }
   }
 });

@@ -1,6 +1,6 @@
 {
   "name": "balm-scroll",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Smooth scrolling for Vue.js",
   "keywords": [
     "scrolling",
@@ -21,7 +21,8 @@
     "url": "http://elf-mouse.me"
   },
   "files": [
-    "dist"
+    "dist",
+    "components"
   ],
   "main": "dist/balm-scroll.js",
   "scripts": {
