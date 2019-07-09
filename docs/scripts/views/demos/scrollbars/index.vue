@@ -1,13 +1,10 @@
 <template>
-  <div class="demo--simple">
-    <header class="balm-scroll--header">Balm Scroll: simple</header>
+  <div class="demo--scrollbars">
+    <header class="balm-scroll--header">Balm Scroll: scrollbars</header>
     <ui-scroll ref="iScroll" :options="options">
       <ul>
         <li v-for="i in list" :key="i">Pretty row {{ i }}</li>
       </ul>
-      <!-- <p>
-        <ui-button @click="loadMore">Get More</ui-button>
-      </p>-->
     </ui-scroll>
     <footer class="balm-scroll--footer">Thx BalmJS</footer>
   </div>
@@ -17,15 +14,15 @@
 export default {
   data() {
     return {
-      options: { mouseWheel: true },
+      options: {
+        scrollbars: true,
+        mouseWheel: true,
+        interactiveScrollbars: true,
+        shrinkScrollbars: 'scale',
+        fadeScrollbars: true
+      },
       list: 50
     };
-  },
-  methods: {
-    loadMore() {
-      this.list += 50;
-      this.$refs.iScroll.refresh();
-    }
   }
 };
 </script>

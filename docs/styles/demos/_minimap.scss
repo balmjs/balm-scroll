@@ -1,0 +1,52 @@
+.demo--minimap {
+  .ui-scroll {
+    top: 0;
+    bottom: 0;
+  }
+
+  .ui-scroll--wrapper {
+    width: 235px;
+    height: 321px;
+    background: #555;
+  }
+
+  .ui-scroll--scroller {
+    width: 797px;
+    height: 1087px;
+    background: url(../images/demos/ermine.jpg);
+  }
+
+  #minimap {
+    position: absolute;
+    z-index: 1;
+    width: 235px;
+    height: 321px;
+    background: url(../images/demos/ermine.jpg);
+    background-size: 235px 321px;
+    top: 0px;
+    left: 245px;
+  }
+
+  #minimap-indicator {
+    position: absolute;
+    z-index: 1;
+    border: 1px solid #fe0;
+    box-shadow: 0 0 5px #000;
+    background: rgba(255, 255, 255, 0.15);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  #bookmarks {
+    position: absolute;
+    left: 520px;
+    font-size: 1.4em;
+  }
+
+  #bookmarks li {
+    margin: 5px 0;
+  }
+}

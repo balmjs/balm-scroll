@@ -13,6 +13,11 @@ import scrollMixin from '../mixins/scroll';
 export default {
   name: 'ui-scroll',
   mixins: [scrollMixin],
+  data() {
+    return {
+      utils: iScroll.utils
+    };
+  },
   mounted() {
     this.$nextTick(() => {
       this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));

@@ -1,13 +1,10 @@
 <template>
-  <div class="demo--simple">
-    <header class="balm-scroll--header">Balm Scroll: simple</header>
+  <div class="demo--horizontal">
+    <header class="balm-scroll--header">Balm Scroll: horizontal</header>
     <ui-scroll ref="iScroll" :options="options">
       <ul>
-        <li v-for="i in list" :key="i">Pretty row {{ i }}</li>
+        <li v-for="i in list" :key="i">Cell {{ i }}</li>
       </ul>
-      <!-- <p>
-        <ui-button @click="loadMore">Get More</ui-button>
-      </p>-->
     </ui-scroll>
     <footer class="balm-scroll--footer">Thx BalmJS</footer>
   </div>
@@ -17,7 +14,7 @@
 export default {
   data() {
     return {
-      options: { mouseWheel: true },
+      options: { scrollX: true, scrollY: false, mouseWheel: true },
       list: 50
     };
   },

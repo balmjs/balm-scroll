@@ -1,6 +1,6 @@
 <template>
   <div class="demo--bounce-easing">
-    <header class="balm-scroll--header">Balm Scroll</header>
+    <header class="balm-scroll--header">Balm Scroll: bounce easing</header>
     <ui-scroll :options="options">
       <ul>
         <li v-for="i in 50" :key="i">Pretty row {{ i }}</li>

@@ -1,6 +1,6 @@
 <template>
   <div class="demo--pull2refresh">
-    <header class="balm-scroll--header">Balm Scroll</header>
+    <header class="balm-scroll--header">Balm Scroll: pull to refresh</header>
     <ui-scroll-probe :pullDownAction="pullDownAction" :pullUpAction="pullUpAction">
       <ul id="datalist">
         <li v-for="i in list" :key="i">

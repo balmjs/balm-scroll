@@ -1,6 +1,6 @@
 <template>
   <div class="demo--infinite">
-    <header class="balm-scroll--header">Balm Scroll</header>
+    <header class="balm-scroll--header">Balm Scroll: infinite</header>
     <ui-scroll-infinite ref="iScroll" id="scroller" :options="options">
       <ul>
         <li v-for="i in list" :key="i" class="row">{{ i }}</li>

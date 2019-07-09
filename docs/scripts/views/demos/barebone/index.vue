@@ -1,6 +1,6 @@
 <template>
   <div class="demo--barebone">
-    <header class="balm-scroll--header">Balm Scroll</header>
+    <header class="balm-scroll--header">Balm Scroll: barebone</header>
     <ui-scroll>
       <p>
         <strong>This demo shows the minimum CSS/HTML/JS configuration you need to run the iScroll. Look at the source code for details.</strong>
