@@ -6,15 +6,23 @@
 
 iScroll + Vue.js
 
-## 1. Usage
+## 1. Install
 
-### 1.1 Css (Edit `my-project/app/styles/global/_vendor.scss`)
+```sh
+npm i --save balm-scroll
+# OR
+yarn add balm-scroll
+```
+
+## 2. Usage
+
+### 2.1 Css (Edit `my-project/app/styles/global/_vendor.scss`)
 
 ```css
 @import 'node_modules/balm-scroll/src/styles/balm-scroll.scss';
 ```
 
-### 1.2 Js (Edit `my-project/app/scripts/main.js`)
+### 2.2 Js (Edit `my-project/app/scripts/main.js`)
 
 ```js
 import Vue from 'vue';
@@ -23,7 +31,7 @@ import BalmScroll from 'balm-scroll';
 Vue.use(BalmScroll);
 ```
 
-### 1.3 Vue (Edit a vue component: `my-project/app/scripts/views/demos/hello.vue`)
+### 2.3 Vue (Edit a vue component: `my-project/app/scripts/views/demos/hello.vue`)
 
 ```html
 <template>
@@ -45,9 +53,9 @@ export default {
 };
 ```
 
-## 2. Configuring
+## 3. Configuring
 
-### 2.1 The many faces of [iScroll](https://github.com/cubiq/iscroll/#the-many-faces-of-iscroll)
+### 3.1 The many faces of [iScroll](https://github.com/cubiq/iscroll/#the-many-faces-of-iscroll)
 
 - `<ui-scroll>`
 - `<ui-scroll-lite>`
@@ -57,13 +65,13 @@ export default {
 
 > Tips: You can [pick one](https://github.com/cubiq/iscroll/#the-many-faces-of-iscroll) component that better suits your need
 
-### 2.2 Options
+### 3.2 Options
 
 - See [here](https://github.com/cubiq/iscroll/#configuring-the-iscroll)
 
-## 3. Props, Slots and Events
+## 4. Props, Slots and Events
 
-### 3.1 Props
+### 4.1 Props
 
 | Name               | Type       | Default                  | Description          |
 | ------------------ | ---------- | ------------------------ | -------------------- |
@@ -97,7 +105,7 @@ export default {
 };
 ```
 
-### 3.2 Slots
+### 4.2 Slots
 
 | Name               | Description                                        |
 | ------------------ | -------------------------------------------------- |
@@ -109,7 +117,7 @@ export default {
 
 > ⚠️: Applicable only for the `<ui-scroll-probe>`
 
-## 4. Special Thanks to
+## 5. Special Thanks to
 
 - [BalmJS](https://balmjs.com/)
 - [Vue.js](https://vuejs.org/)
