@@ -47,6 +47,9 @@ module.exports = {
     },
     include: env.useDocs ? [path.resolve(__dirname, '../src/scripts')] : []
   },
+  extras: {
+    includes: ['CNAME', 'balm-scroll-images.zip']
+  },
   assets: {
     publicUrl: env.buildDocs ? '//iscroll.balmjs.com/' : ''
   },
