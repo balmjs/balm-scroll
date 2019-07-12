@@ -27,6 +27,8 @@ balm.go(mix => {
       mix.copy('node_modules/balm-ui/fonts/*', 'docs/fonts');
     } else {
       if (balm.config.isProd) {
+        // build add sass
+        mix.copy('src/styles/balm-scroll.scss', 'dist/sass');
         // clear individual
         mix.remove(['./components']);
         // build individual
