@@ -1,7 +1,7 @@
-$balm-scroll-pull-area-height: 40px;
-$balm-scroll-pull-area-padding: 0 10px;
-$balm-scroll-pull-area-bgcolor: #fff;
-$balm-scroll-pull-area-color: gray;
+$balm-scroll-pull-area-height: 40px !default;
+$balm-scroll-pull-area-padding: 0 10px !default;
+$balm-scroll-pull-area-bgcolor: #fff !default;
+$balm-scroll-pull-area-color: gray !default;
 
 /* BalmScroll styles */
 .ui-scroll--wrapper {
