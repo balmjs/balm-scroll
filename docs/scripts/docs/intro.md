@@ -24,7 +24,7 @@ yarn add balm-scroll
 #### 2.1 Css (Edit `my-project/app/styles/global/_vendor.scss`)
 
 ```css
-@import 'node_modules/balm-scroll/dist/sass/balm-scroll.scss';
+@import 'node_modules/balm-scroll/dist/balm-scroll.scss';
 ```
 
 #### 2.2 Js (Edit `my-project/app/scripts/main.js`)

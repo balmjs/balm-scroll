@@ -27,8 +27,6 @@ balm.go(mix => {
       mix.copy('node_modules/balm-ui/fonts/*', 'docs/fonts');
     } else {
       if (balm.config.isProd) {
-        // build add sass
-        mix.copy('src/styles/balm-scroll.scss', 'dist/sass');
         // clear individual
         mix.remove(['./components']);
         // build individual
@@ -42,6 +40,13 @@ balm.go(mix => {
           return `./src/scripts/components/${item}.js`;
         });
         mix.js(buildFiles, './components');
+        // clean build
+        mix.copy(
+          ['./dist/css/*.css', './dist/js/*.js', './dist/img/*'],
+          './dist'
+        );
+        mix.copy('src/styles/balm-scroll.scss', 'dist');
+        mix.remove(['./dist/css', './dist/js', './dist/img']);
       }
     }
   }
