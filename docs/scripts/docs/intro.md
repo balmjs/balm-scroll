@@ -78,18 +78,19 @@ export default {
 
 #### 4.1 Props
 
-| Name               | Type       | Default                  | Description          |
-| ------------------ | ---------- | ------------------------ | -------------------- |
-| `options`          | `object`   | `{}`                     | iScroll options      |
-| `pullDownLabel` ⚠️ | `string`   | `'Pull down to refresh'` | Pull down label      |
-| `pullUpLabel` ⚠️   | `string`   | `'Pull up to load more'` | Pull up label        |
-| `releaseLabel` ⚠️  | `string`   | `'Release to update'`    | Release label        |
-| `loadingLabel` ⚠️  | `string`   | `'Loading...'`           | Loading label        |
-| `pullDownY` ⚠️     | `number`   | `5`                      | Pull down Y position |
-| `pullAction` ⚠️    | `function` | `null`                   | Scroll action        |
-| `pullDownAction`   | `function` | `null`                   | Pull down action     |
-| `pullUpAction`     | `function` | `null`                   | Pull up action       |
-| `refreshTimeout`   | `number`   | `1000`                   | Refresh timeout      |
+| Name               | Type       | Default                  | Description                                   |
+| ------------------ | ---------- | ------------------------ | --------------------------------------------- |
+| `options`          | `object`   | `{}`                     | iScroll options                               |
+| `pullDownLabel` ⚠️ | `string`   | `'Pull down to refresh'` | Pull down label                               |
+| `pullUpLabel` ⚠️   | `string`   | `'Pull up to load more'` | Pull up label                                 |
+| `releaseLabel` ⚠️  | `string`   | `'Release to update'`    | Release label                                 |
+| `loadingLabel` ⚠️  | `string`   | `'Loading...'`           | Loading label                                 |
+| `pullDownY` ⚠️     | `number`   | `5`                      | Pull down Y position                          |
+| `pullAction` ⚠️    | `function` | `null`                   | Scroll action                                 |
+| `pullDownAction`   | `function` | `null`                   | Pull down action                              |
+| `pullUpAction`     | `function` | `null`                   | Pull up action                                |
+| `refreshTimeout`   | `number`   | `1000`                   | Refresh timeout                               |
+| `excludes`         | `array`    |                          | Excludes for `touchmove` event preventDefault |
 
 > ⚠️: Applicable only for the `<ui-scroll-probe>`
 
