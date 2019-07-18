@@ -71,7 +71,7 @@ $balm-scroll-pull-area-color: gray !default;
   .ui-scroll--pull-up-icon {
     background-position: 0 100%;
     transform: rotate(0deg) translateZ(0);
-    transition-duration: 0;
+    transition-duration: initial;
 
     animation-name: loading;
     animation-duration: 2s;

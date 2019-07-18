@@ -42,7 +42,8 @@ export default {
     refreshTimeout: {
       type: Number,
       default: 1e3
-    }
+    },
+    excludes: Array
   },
   data() {
     return {
@@ -77,8 +78,22 @@ export default {
 
     document.addEventListener(
       'touchmove',
-      function(e) {
-        e.preventDefault();
+      e => {
+        let canPreventDefault = true;
+        if (e.target.classList.length) {
+          for (let i = 0, len = e.target.classList.length; i < len; i++) {
+            let currentClassName = e.target.classList[i];
+            if (
+              /^md(c|l)-/.test(currentClassName) ||
+              (this.excludes && this.excludes.includes(currentClassName))
+            ) {
+              canPreventDefault = false;
+              break;
+            }
+          }
+        }
+
+        canPreventDefault && e.preventDefault();
       },
       isPassive()
         ? {
