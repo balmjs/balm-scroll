@@ -21,8 +21,8 @@ module.exports = {
       : {
           'balm-scroll': './src/scripts/index.js'
         },
-    library: 'BalmScroll',
-    libraryTarget: 'umd',
+    library: env.useDocs ? '' : 'BalmScroll',
+    libraryTarget: env.useDocs ? 'var' : 'umd',
     loaders: [
       {
         test: /\.vue$/,
