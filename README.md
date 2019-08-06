@@ -4,6 +4,8 @@
 
 iScroll based, smooth scrolling for Vue.js
 
+## [Demos & Documentation](https://iscroll.balmjs.com/)
+
 ## Quick Start
 
 ### 0. Requirement
@@ -57,6 +59,10 @@ export default {
   }
 };
 ```
+
+#### 2.4 Default css sprites
+
+Download [`pull-icon@2x.png`](https://iscroll.balmjs.com/balm-scroll-images.zip) and extract to `/path/to/my-project/app/images`.
 
 ### 3. Configuring
 
