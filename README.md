@@ -97,6 +97,7 @@ Download [`pull-icon@2x.png`](https://iscroll.balmjs.com/balm-scroll-images.zip)
 | `pullUpAction`     | `function` | `null`                   | Pull up action                                |
 | `refreshTimeout`   | `number`   | `1000`                   | Refresh timeout                               |
 | `excludes`         | `array`    |                          | Excludes for `touchmove` event preventDefault |
+| `scrollEnabled` ⚠️ | `boolean`  | `true`                   | Load more data controls                       |
 
 > ⚠️: Applicable only for the `<ui-scroll-probe>`
 

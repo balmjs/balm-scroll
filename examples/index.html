@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1, maximum-scale=1">
+  <title>Balm Scroll Example</title>
+  <link rel="stylesheet" href="/dist/balm-scroll.css">
+  <style>
+  body, ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+  #datalist li {
+    height: 200px;
+    padding: 20px 40px;
+  }
+  #datalist li:nth-child(odd) {
+    background: black;
+    color: white;
+  }
+  #datalist img {
+    height: 120px;
+  }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <ui-scroll-probe :pull-down-action="pullDownAction" :pull-up-action="pullUpAction">
+      <ul id="datalist">
+        <li v-for="i in list" :key="i">
+          <figure>
+            <img :src="`https://picsum.photos/120?random=${i}`" />
+            <figcaption>Pretty row {{ i }}</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </ui-scroll-probe>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <script src="/components/scroll-probe.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        list: 10
+      },
+      methods: {
+        pullDownAction() {
+          this.list = 10;
+          console.log('pullDownAction');
+        },
+        pullUpAction() {
+          console.log('pullUpAction');
+          this.list += 10;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -43,7 +43,11 @@ export default {
       type: Number,
       default: 1e3
     },
-    excludes: Array
+    excludes: Array,
+    scrollEnabled: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -139,6 +143,7 @@ export default {
       }
     },
     onScroll() {
+      let canScroll = true;
       let currentY = this.$scroll.y;
 
       if (UI_SCROLL.isDev) {
@@ -164,17 +169,22 @@ export default {
       } else if (pullDownToRefresh) {
         this.pullDownEl.classList.add(UI_SCROLL.className.flip);
         this.pullDownLabelEl.innerHTML = this.releaseLabel;
-      } else if (pullUp) {
-        this.pullUpEl.classList.remove(UI_SCROLL.className.flip);
-        this.pullUpLabelEl.innerHTML = this.pullUpLabel;
-        this.$scroll.maxScrollY += this.pullUpOffset;
-      } else if (pullUpToLoadMore) {
-        this.pullUpEl.classList.add(UI_SCROLL.className.flip);
-        this.pullUpLabelEl.innerHTML = this.releaseLabel;
-        this.$scroll.maxScrollY -= this.pullUpOffset;
+      } else if (this.scrollEnabled) {
+        if (pullUp) {
+          this.pullUpEl.classList.remove(UI_SCROLL.className.flip);
+          this.pullUpLabelEl.innerHTML = this.pullUpLabel;
+          this.$scroll.maxScrollY += this.pullUpOffset;
+        } else if (pullUpToLoadMore) {
+          this.pullUpEl.classList.add(UI_SCROLL.className.flip);
+          this.pullUpLabelEl.innerHTML = this.releaseLabel;
+          this.$scroll.maxScrollY -= this.pullUpOffset;
+        }
+      } else {
+        canScroll = false;
+        console.log(`scroll disabled`);
       }
 
-      if (this.isScrolling && this.pullAction) {
+      if (canScroll && this.isScrolling && this.pullAction) {
         this.pullAction(this.$scroll);
       }
     },

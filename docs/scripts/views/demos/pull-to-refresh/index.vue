@@ -1,7 +1,12 @@
 <template>
   <div class="demo--pull2refresh">
     <header class="balm-scroll--header">Balm Scroll: pull to refresh</header>
-    <ui-scroll-probe :pullDownAction="pullDownAction" :pullUpAction="pullUpAction">
+    <ui-scroll-probe
+      :pullDownAction="pullDownAction"
+      :pullUpAction="pullUpAction"
+      :scrollEnabled="scrollEnabled"
+      :pullUpLabel="scrollEnabled ? 'Pull up to load more' : 'No more data'"
+    >
       <ul id="datalist">
         <li v-for="i in list" :key="i">
           <figure>
@@ -19,18 +24,35 @@
 export default {
   data() {
     return {
-      list: 10
+      list: 10,
+      scrollEnabled: true
     };
   },
   methods: {
     pullDownAction() {
       this.list = 10;
       console.log('pullDownAction');
+      this.scrollEnabled = true;
     },
     pullUpAction() {
-      console.log('pullUpAction');
-      this.list += 10;
+      const LAST_ITEM = 30;
+      if (this.list < LAST_ITEM) {
+        console.log('pullUpAction');
+        this.list += 10;
+
+        if (this.list === LAST_ITEM) {
+          this.scrollEnabled = false;
+        }
+      } else {
+        console.log('gg');
+      }
     }
   }
 };
 </script>
+
+<style>
+.ui-scroll--disabled .ui-scroll--pull-up-icon {
+  visibility: hidden;
+}
+</style>

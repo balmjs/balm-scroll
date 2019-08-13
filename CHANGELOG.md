@@ -1,5 +1,13 @@
 # BalmScroll ChangeLog
 
+## 0.5.0 (2019.08.13)
+
+### New Config
+
+- add `scrollEnabled`: `boolean` prop for load more data controls
+
+---
+
 ## 0.4.0 (2019.07.18)
 
 ### New Config
