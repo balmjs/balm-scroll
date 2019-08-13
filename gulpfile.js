@@ -30,16 +30,33 @@ balm.go(mix => {
         // clear individual
         mix.remove(['./components']);
         // build individual
-        let buildFiles = [
+        // let buildFiles = [
+        //   'scroll',
+        //   'scroll-lite',
+        //   'scroll-probe',
+        //   'scroll-zoom',
+        //   'scroll-infinite'
+        // ].map(item => {
+        //   return `./src/scripts/components/${item}.js`;
+        // });
+        // mix.js(buildFiles, './components');
+        [
           'scroll',
           'scroll-lite',
           'scroll-probe',
           'scroll-zoom',
           'scroll-infinite'
-        ].map(item => {
-          return `./src/scripts/components/${item}.js`;
+        ].forEach(async item => {
+          await mix.js(
+            [`./src/scripts/components/${item}.js`],
+            './components',
+            {
+              output: {
+                library: 'BalmScroll_' + item
+              }
+            }
+          );
         });
-        mix.js(buildFiles, './components');
         // clean build
         mix.copy(
           ['./dist/css/*.css', './dist/js/*.js', './dist/img/*'],
