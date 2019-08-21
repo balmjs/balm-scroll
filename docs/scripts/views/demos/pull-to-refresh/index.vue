@@ -2,6 +2,7 @@
   <div class="demo--pull2refresh">
     <header class="balm-scroll--header">Balm Scroll: pull to refresh</header>
     <ui-scroll-probe
+      ref="iScroll"
       :pullDownAction="pullDownAction"
       :pullUpAction="pullUpAction"
       :scrollEnabled="scrollEnabled"
@@ -21,24 +22,32 @@
 </template>
 
 <script>
+const PAGE_SIZE = 10;
+
 export default {
   data() {
     return {
-      list: 10,
+      list: 0,
       scrollEnabled: true
     };
   },
+  mounted() {
+    setTimeout(() => {
+      this.list = PAGE_SIZE;
+      this.$refs.iScroll.refresh();
+    }, 1);
+  },
   methods: {
     pullDownAction() {
-      this.list = 10;
+      this.list = PAGE_SIZE;
       console.log('pullDownAction');
       this.scrollEnabled = true;
     },
     pullUpAction() {
-      const LAST_ITEM = 30;
+      const LAST_ITEM = PAGE_SIZE * 3;
       if (this.list < LAST_ITEM) {
         console.log('pullUpAction');
-        this.list += 10;
+        this.list += PAGE_SIZE;
 
         if (this.list === LAST_ITEM) {
           this.scrollEnabled = false;
