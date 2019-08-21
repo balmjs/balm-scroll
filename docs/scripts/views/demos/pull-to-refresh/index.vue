@@ -2,6 +2,7 @@
   <div class="demo--pull2refresh">
     <header class="balm-scroll--header">Balm Scroll: pull to refresh</header>
     <ui-scroll-probe
+      v-if="list"
       ref="iScroll"
       :pullDownAction="pullDownAction"
       :pullUpAction="pullUpAction"
@@ -34,7 +35,6 @@ export default {
   mounted() {
     setTimeout(() => {
       this.list = PAGE_SIZE;
-      this.$refs.iScroll.refresh();
     }, 1);
   },
   methods: {
