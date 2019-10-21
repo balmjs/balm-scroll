@@ -1,7 +1,6 @@
 import isPassive from '../utils';
 
 const UI_SCROLL = {
-  isDev: false,
   className: {
     flip: 'flip',
     loading: 'loading'
@@ -10,6 +9,10 @@ const UI_SCROLL = {
 
 export default {
   props: {
+    debug: {
+      type: Boolean,
+      default: false
+    },
     options: {
       type: Object,
       default() {
@@ -62,6 +65,11 @@ export default {
       isScrolling: false
     };
   },
+  watch: {
+    pullUpLabel(val) {
+      this.pullUpLabelEl.innerHTML = val;
+    }
+  },
   mounted() {
     if (this.pullDownAction) {
       this.pullDownEl = this.$refs.pullDown;
@@ -74,7 +82,7 @@ export default {
       this.pullUpOffset = this.pullUpEl.offsetHeight;
     }
 
-    if (UI_SCROLL.isDev) {
+    if (this.debug) {
       console.log('--------mounted--------');
       console.log(`pullDownOffset: ${this.pullDownOffset}`);
       console.log(`pullUpOffset: ${this.pullUpOffset}`);
@@ -137,7 +145,7 @@ export default {
         this.isScrolling = true;
       }
 
-      if (UI_SCROLL.isDev) {
+      if (this.debug) {
         console.log('--------onScrollStart--------');
         console.log(`start-y: ${this.$scroll.y}`);
       }
@@ -146,7 +154,7 @@ export default {
       let canScroll = true;
       let currentY = this.$scroll.y;
 
-      if (UI_SCROLL.isDev) {
+      if (this.debug) {
         console.log('--------onScroll--------');
         console.log(`current y: ${currentY}`);
       }
@@ -191,7 +199,7 @@ export default {
     onScrollEnd() {
       let currentY = this.$scroll.y;
 
-      if (UI_SCROLL.isDev) {
+      if (this.debug) {
         console.log('--------onScrollEnd--------');
         console.log(`current position: ${currentY}`);
         console.log(`last direction: ${this.$scroll.directionY}`);
@@ -205,52 +213,50 @@ export default {
       let pullUp = this._isPullUp(UI_SCROLL.className.flip);
 
       if (resume) {
-        UI_SCROLL.isDev && console.log('resume');
+        this.debug && console.log('resume');
         this.$scroll.scrollTo(0, this.$scroll.options.startY, 800);
       } else if (pullDown) {
-        UI_SCROLL.isDev && console.log('pull down loading');
+        this.debug && console.log('pull down loading');
         this.pullDownEl.classList.add(UI_SCROLL.className.loading);
         this.pullDownLabelEl.innerHTML = this.loadingLabel;
 
         if (this.isScrolling && this.pullDownAction) {
-          UI_SCROLL.isDev &&
-            console.log(`before pull down action: ${currentY}`);
+          this.debug && console.log(`before pull down action: ${currentY}`);
 
-          setTimeout(() => {
-            this.pullDownAction(this.$scroll);
+          setTimeout(async () => {
+            await this.pullDownAction(this.$scroll);
             this.refresh();
           }, this.refreshTimeout);
 
-          UI_SCROLL.isDev && console.log(`after pull down action: ${currentY}`);
+          this.debug && console.log(`after pull down action: ${currentY}`);
         }
       } else if (pullUp) {
-        UI_SCROLL.isDev && console.log('pull up loading');
+        this.debug && console.log('pull up loading');
         this.pullUpEl.classList.add(UI_SCROLL.className.loading);
         this.pullUpLabelEl.innerHTML = this.loadingLabel;
 
         if (this.isScrolling && this.pullUpAction) {
-          UI_SCROLL.isDev && console.log(`before pull up action: ${currentY}`);
+          this.debug && console.log(`before pull up action: ${currentY}`);
 
-          setTimeout(() => {
-            this.pullUpAction(this.$scroll);
+          setTimeout(async () => {
+            await this.pullUpAction(this.$scroll);
             this.refresh();
           }, this.refreshTimeout);
 
-          UI_SCROLL.isDev && console.log(`after pull up action: ${currentY}`);
+          this.debug && console.log(`after pull up action: ${currentY}`);
         }
       }
 
       this.isScrolling = false;
     },
     onRefresh() {
-      if (UI_SCROLL.isDev) {
+      if (this.debug) {
         console.log('--------onRefresh--------');
         console.log(`before maxScrollY: ${this.$scroll.maxScrollY}`);
       }
       this.$scroll.maxScrollY += this.pullUpOffset;
       this.currentMaxScrollY = this.$scroll.maxScrollY;
-      UI_SCROLL.isDev &&
-        console.log(`after maxScrollY: ${this.$scroll.maxScrollY}`);
+      this.debug && console.log(`after maxScrollY: ${this.$scroll.maxScrollY}`);
 
       let pullDown = this._isPullDown(UI_SCROLL.className.loading);
       let pullUp = this._isPullUp(UI_SCROLL.className.loading);
@@ -267,7 +273,7 @@ export default {
         this.pullUpLabelEl.innerHTML = this.pullUpLabel;
       }
 
-      UI_SCROLL.isDev && console.log('refresh finished!');
+      this.debug && console.log('refresh finished!');
     },
     refresh() {
       this.$nextTick(() => {
