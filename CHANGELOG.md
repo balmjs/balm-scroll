@@ -1,5 +1,17 @@
 # BalmScroll ChangeLog
 
+## 0.5.1 (2019.10.21)
+
+### New Config
+
+- add `debug`: `boolean` prop for development
+
+### Bugfix
+
+- fix `pullUpLabel` watch status
+
+---
+
 ## 0.5.0 (2019.08.13)
 
 ### New Config
