@@ -42,10 +42,6 @@ export default {
     pullAction: Function,
     pullDownAction: Function,
     pullUpAction: Function,
-    refreshTimeout: {
-      type: Number,
-      default: 1e3
-    },
     excludes: Array,
     scrollEnabled: {
       type: Boolean,
@@ -189,7 +185,7 @@ export default {
         }
       } else {
         canScroll = false;
-        console.log(`scroll disabled`);
+        this.debug && console.log(`scroll disabled`);
       }
 
       if (canScroll && this.isScrolling && this.pullAction) {
@@ -222,12 +218,7 @@ export default {
 
         if (this.isScrolling && this.pullDownAction) {
           this.debug && console.log(`before pull down action: ${currentY}`);
-
-          setTimeout(async () => {
-            await this.pullDownAction(this.$scroll);
-            this.refresh();
-          }, this.refreshTimeout);
-
+          this.pullDownAction(this.$scroll.refresh);
           this.debug && console.log(`after pull down action: ${currentY}`);
         }
       } else if (pullUp) {
@@ -237,12 +228,7 @@ export default {
 
         if (this.isScrolling && this.pullUpAction) {
           this.debug && console.log(`before pull up action: ${currentY}`);
-
-          setTimeout(async () => {
-            await this.pullUpAction(this.$scroll);
-            this.refresh();
-          }, this.refreshTimeout);
-
+          this.pullUpAction(this.$scroll.refresh);
           this.debug && console.log(`after pull up action: ${currentY}`);
         }
       }

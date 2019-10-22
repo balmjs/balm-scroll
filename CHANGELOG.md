@@ -1,5 +1,42 @@
 # BalmScroll ChangeLog
 
+## 0.5.2 (2019.10.22)
+
+### New Features
+
+- update `pullUp` and `pullDown` actions
+  - `pullDownAction(refresh: Function)`
+  - `pullUpAction(refresh: Function)`
+
+```html
+<ui-scroll ref="iScroll" :pullUpAction="pullUpAction"></ui-scroll>
+```
+
+```js
+export default {
+  methods: {
+    firstLoaded() {
+      // Update here your DOM
+
+      this.$refs.iScroll.refresh();
+    },
+    pullUpAction(refresh) {
+      // Update here your DOM
+
+      setTimeout(function() {
+        refresh();
+      }, 0);
+    }
+  }
+};
+```
+
+### Breaking Change
+
+- remove config: `refreshTimeout`
+
+---
+
 ## 0.5.1 (2019.10.21)
 
 ### New Config

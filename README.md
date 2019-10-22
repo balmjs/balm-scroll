@@ -84,35 +84,42 @@ Download [`pull-icon@2x.png`](https://iscroll.balmjs.com/balm-scroll-images.zip)
 
 #### 4.1 Props
 
-| Name               | Type       | Default                  | Description                                   |
-| ------------------ | ---------- | ------------------------ | --------------------------------------------- |
-| `options`          | `object`   | `{}`                     | iScroll options                               |
-| `pullDownLabel` ⚠️ | `string`   | `'Pull down to refresh'` | Pull down label                               |
-| `pullUpLabel` ⚠️   | `string`   | `'Pull up to load more'` | Pull up label                                 |
-| `releaseLabel` ⚠️  | `string`   | `'Release to update'`    | Release label                                 |
-| `loadingLabel` ⚠️  | `string`   | `'Loading...'`           | Loading label                                 |
-| `pullDownY` ⚠️     | `number`   | `5`                      | Pull down Y position                          |
-| `pullAction` ⚠️    | `function` | `null`                   | Scroll action                                 |
-| `pullDownAction`   | `function` | `null`                   | Pull down action                              |
-| `pullUpAction`     | `function` | `null`                   | Pull up action                                |
-| `refreshTimeout`   | `number`   | `1000`                   | Refresh timeout                               |
-| `excludes`         | `array`    |                          | Excludes for `touchmove` event preventDefault |
-| `scrollEnabled` ⚠️ | `boolean`  | `true`                   | Load more data controls                       |
+| Name               | Type                          | Default                  | Description                                   |
+| ------------------ | ----------------------------- | ------------------------ | --------------------------------------------- |
+| `options`          | `object`                      | `{}`                     | iScroll options                               |
+| `pullDownLabel` ⚠️ | `string`                      | `'Pull down to refresh'` | Pull down label                               |
+| `pullUpLabel` ⚠️   | `string`                      | `'Pull up to load more'` | Pull up label                                 |
+| `releaseLabel` ⚠️  | `string`                      | `'Release to update'`    | Release label                                 |
+| `loadingLabel` ⚠️  | `string`                      | `'Loading...'`           | Loading label                                 |
+| `pullDownY` ⚠️     | `number`                      | `5`                      | Pull down Y position                          |
+| `pullAction` ⚠️    | `function(scroll: object)`    | `null`                   | Scroll action                                 |
+| `pullDownAction`   | `function(refresh: Function)` | `null`                   | Pull down action                              |
+| `pullUpAction`     | `function(refresh: Function)` | `null`                   | Pull up action                                |
+| `excludes`         | `array`                       |                          | Excludes for `touchmove` event preventDefault |
+| `scrollEnabled` ⚠️ | `boolean`                     | `true`                   | Load more data controls                       |
 
 > ⚠️: Applicable only for the `<ui-scroll-probe>`
 
 - **Special function**
 
 ```html
-<ui-scroll ref="iScroll"></ui-scroll>
+<ui-scroll ref="iScroll" :pullUpAction="pullUpAction"></ui-scroll>
 ```
 
 ```js
 export default {
   methods: {
-    loadMore() {
-      // ...
+    firstLoaded() {
+      // Update here your DOM
+
       this.$refs.iScroll.refresh();
+    },
+    pullUpAction(refresh) {
+      // Update here your DOM
+
+      setTimeout(function() {
+        refresh();
+      }, 0);
     }
   }
 };
