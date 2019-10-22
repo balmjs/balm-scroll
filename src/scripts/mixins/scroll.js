@@ -218,7 +218,7 @@ export default {
 
         if (this.isScrolling && this.pullDownAction) {
           this.debug && console.log(`before pull down action: ${currentY}`);
-          this.pullDownAction(this.$scroll.refresh);
+          this.pullDownAction(this.refresh);
           this.debug && console.log(`after pull down action: ${currentY}`);
         }
       } else if (pullUp) {
@@ -228,7 +228,7 @@ export default {
 
         if (this.isScrolling && this.pullUpAction) {
           this.debug && console.log(`before pull up action: ${currentY}`);
-          this.pullUpAction(this.$scroll.refresh);
+          this.pullUpAction(this.refresh);
           this.debug && console.log(`after pull up action: ${currentY}`);
         }
       }
