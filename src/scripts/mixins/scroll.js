@@ -86,23 +86,7 @@ export default {
 
     document.addEventListener(
       'touchmove',
-      e => {
-        let canPreventDefault = true;
-        if (e.target.classList.length) {
-          for (let i = 0, len = e.target.classList.length; i < len; i++) {
-            let currentClassName = e.target.classList[i];
-            if (
-              /^md(c|l)-/.test(currentClassName) ||
-              (this.excludes && this.excludes.includes(currentClassName))
-            ) {
-              canPreventDefault = false;
-              break;
-            }
-          }
-        }
-
-        canPreventDefault && e.preventDefault();
-      },
+      this._touchMoveHandler,
       isPassive()
         ? {
             capture: false,
@@ -112,10 +96,28 @@ export default {
     );
   },
   beforeDestroy() {
+    document.removeEventListener('touchmove', this._touchMoveHandler);
     this.$scroll.destroy();
     this.$scroll = null;
   },
   methods: {
+    _touchMoveHandler(e) {
+      let canPreventDefault = true;
+      if (e.target.classList.length) {
+        for (let i = 0, len = e.target.classList.length; i < len; i++) {
+          let currentClassName = e.target.classList[i];
+          if (
+            /^md(c|l)-/.test(currentClassName) ||
+            (this.excludes && this.excludes.includes(currentClassName))
+          ) {
+            canPreventDefault = false;
+            break;
+          }
+        }
+      }
+
+      canPreventDefault && e.preventDefault();
+    },
     _isPullDown(className, LogicalNot = false) {
       return (
         this.pullDownEl &&

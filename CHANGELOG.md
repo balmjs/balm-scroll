@@ -1,5 +1,13 @@
 # BalmScroll ChangeLog
 
+## 0.5.3 (2019.10.29)
+
+### Bugfix
+
+- fix `touchmove` bug
+
+---
+
 ## 0.5.2 (2019.10.22)
 
 ### New Features
