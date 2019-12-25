@@ -1,9 +1,13 @@
 a {
   color: $mdc-theme-primary;
 }
+html,
+body {
+  height: 100%;
+}
 
 .balmui-container {
-  height: 100vh;
+  height: 100%;
   font-size: 14px;
 }
 
@@ -46,10 +50,8 @@ a {
 
 .balm-scroll--header,
 .balm-scroll--footer {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  right: 0;
-  left: 0;
   width: 100%;
   background: white;
 }

@@ -4,6 +4,7 @@
     <ui-scroll-probe
       v-if="list"
       ref="iScroll"
+      :options="scrollOptions"
       :pullDownAction="pullDownAction"
       :pullUpAction="pullUpAction"
       :scrollEnabled="scrollEnabled"
@@ -11,10 +12,14 @@
     >
       <ul id="datalist">
         <li v-for="i in list" :key="i">
-          <figure>
+          <a
+            href="https://github.com/"
+            style="display: block;color: inherit;"
+            @click="test"
+          >
             <img :src="`https://picsum.photos/120?random=${i}`" />
             <figcaption>Pretty row {{ i }}</figcaption>
-          </figure>
+          </a>
         </li>
       </ul>
     </ui-scroll-probe>
@@ -25,10 +30,14 @@
 <script>
 const PAGE_SIZE = 10;
 
+const ua = navigator.userAgent.toLowerCase();
+const isIos = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
+
 export default {
   data() {
     return {
       list: 0,
+      scrollOptions: isIos ? { click: true } : {},
       scrollEnabled: true
     };
   },
@@ -38,6 +47,9 @@ export default {
     }, 1);
   },
   methods: {
+    test() {
+      alert('23');
+    },
     pullDownAction() {
       this.list = PAGE_SIZE;
       console.log('pullDownAction');
