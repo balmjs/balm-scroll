@@ -1,6 +1,6 @@
 {
   "name": "balm-scroll",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Smooth scrolling for Vue.js",
   "keywords": [
     "scrolling",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.3",
-    "balm": "^1.9.0",
+    "balm": "^2.6.0",
     "balm-ui": "^3.2.0",
     "core-js": "2",
     "cross-env": "^6.0.3",

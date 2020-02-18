@@ -3,14 +3,11 @@ const env = require('./env');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  server: {
-    open: false
-  },
   roots: {
     source: env.useDocs ? 'docs' : 'src'
   },
   styles: {
-    ext: 'scss'
+    extname: 'scss'
   },
   scripts: {
     entry: env.useDocs
@@ -45,14 +42,16 @@ module.exports = {
         drop_console: false
       }
     },
-    include: env.useDocs ? [path.resolve(__dirname, '../src/scripts')] : []
+    includeJsResource: env.useDocs
+      ? [path.resolve(__dirname, '../src/scripts')]
+      : []
   },
   extras: {
     includes: ['CNAME', 'balm-scroll-images.zip']
   },
   assets: {
-    publicUrl: env.buildDocs ? '//iscroll.balmjs.com/' : ''
+    publicUrl: env.buildDocs ? '//iscroll.balmjs.com/' : '',
+    cache: env.buildDocs
   },
-  cache: env.buildDocs,
-  useDefault: env.useDefault
+  useDefaults: env.useDefault
 };

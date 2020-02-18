@@ -14,9 +14,7 @@ export default {
   name: 'ui-scroll-lite',
   mixins: [scrollMixin],
   mounted() {
-    this.$nextTick(() => {
-      this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));
-    });
+    this.init(iScroll);
   }
 };
 </script>

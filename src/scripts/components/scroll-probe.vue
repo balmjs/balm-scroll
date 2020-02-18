@@ -1,20 +1,39 @@
 <template>
-  <div :class="['ui-scroll-probe ui-scroll--wrapper', { 'ui-scroll--disabled': !scrollEnabled }]">
+  <div
+    :class="[
+      'ui-scroll-probe ui-scroll--wrapper',
+      { 'ui-scroll--disabled': !scrollEnabled }
+    ]"
+  >
     <div class="ui-scroll--scroller">
-      <div v-if="pullDownAction" ref="pullDown" class="ui-scroll--pull-area ui-scroll--pull-down">
+      <div
+        v-if="pullDownAction"
+        ref="pullDown"
+        class="ui-scroll--pull-area ui-scroll--pull-down"
+      >
         <span class="ui-scroll--pull-icon ui-scroll--pull-down-icon">
           <slot name="pullDownIcon"></slot>
         </span>
-        <span ref="pullDownLabel" class="ui-scroll--pull-label ui-scroll--pull-down-label">
+        <span
+          ref="pullDownLabel"
+          class="ui-scroll--pull-label ui-scroll--pull-down-label"
+        >
           <slot name="pullDownLabel">{{ pullDownLabel }}</slot>
         </span>
       </div>
       <slot></slot>
-      <div v-if="pullUpAction" ref="pullUp" class="ui-scroll--pull-area ui-scroll--pull-up">
+      <div
+        v-if="pullUpAction"
+        ref="pullUp"
+        class="ui-scroll--pull-area ui-scroll--pull-up"
+      >
         <span class="ui-scroll--pull-icon ui-scroll--pull-up-icon">
           <slot name="pullUpIcon"></slot>
         </span>
-        <span ref="pullUpLabel" class="ui-scroll--pull-label ui-scroll--pull-up-label">
+        <span
+          ref="pullUpLabel"
+          class="ui-scroll--pull-label ui-scroll--pull-up-label"
+        >
           <slot name="pullUpLabel">{{ pullUpLabel }}</slot>
         </span>
       </div>
@@ -25,33 +44,20 @@
 <script>
 import iScroll from '../../iscroll/iscroll-probe';
 import scrollMixin from '../mixins/scroll';
+import scrollProbeMixin from '../mixins/scroll-probe';
 
 export default {
   name: 'ui-scroll-probe',
-  mixins: [scrollMixin],
+  mixins: [scrollMixin, scrollProbeMixin],
   mounted() {
-    this.$nextTick(() => {
-      this.$scroll = new iScroll(
-        this.$el,
-        Object.assign(
-          {
-            probeType: 1,
-            startY: this.pullDownAction ? -this.pullDownOffset : 0
-          },
-          this.options
-        )
-      );
-
-      // console.log(`before maxScrollY: ${this.$scroll.maxScrollY}`);
-      this.$scroll.maxScrollY += this.pullUpOffset;
-      this.currentMaxScrollY = this.$scroll.maxScrollY;
-      // console.log(`after maxScrollY: ${this.$scroll.maxScrollY}`);
-
-      this.$scroll.on('scrollStart', this.onScrollStart);
-      this.$scroll.on('scroll', this.onScroll);
-      this.$scroll.on('scrollEnd', this.onScrollEnd);
-      this.$scroll.on('refresh', this.onRefresh);
-    });
+    this.init(
+      iScroll,
+      {
+        probeType: 1,
+        startY: this.pullDownAction ? -this.pullDownOffset : 0
+      },
+      true
+    );
   }
 };
 </script>

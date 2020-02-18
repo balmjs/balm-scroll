@@ -31,13 +31,13 @@
 const PAGE_SIZE = 10;
 
 const ua = navigator.userAgent.toLowerCase();
-const isIos = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
+const isIOS = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
 
 export default {
   data() {
     return {
       list: 0,
-      scrollOptions: isIos ? { click: true } : {},
+      scrollOptions: isIOS ? { click: true } : {},
       scrollEnabled: true
     };
   },
@@ -50,12 +50,14 @@ export default {
     test() {
       alert('23');
     },
-    pullDownAction() {
+    pullDownAction(refresh) {
       this.list = PAGE_SIZE;
       console.log('pullDownAction');
       this.scrollEnabled = true;
+
+      refresh();
     },
-    pullUpAction() {
+    pullUpAction(refresh) {
       const LAST_ITEM = PAGE_SIZE * 3;
       if (this.list < LAST_ITEM) {
         console.log('pullUpAction');
@@ -64,6 +66,8 @@ export default {
         if (this.list === LAST_ITEM) {
           this.scrollEnabled = false;
         }
+
+        refresh();
       } else {
         console.log('gg');
       }

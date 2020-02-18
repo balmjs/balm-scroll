@@ -14,9 +14,7 @@ export default {
   name: 'ui-scroll-infinite',
   mixins: [scrollMixin],
   mounted() {
-    this.$nextTick(() => {
-      this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));
-    });
+    this.init(iScroll);
   },
   methods: {
     updateCache(start, data) {

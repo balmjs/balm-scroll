@@ -14,16 +14,8 @@ export default {
   name: 'ui-scroll-zoom',
   mixins: [scrollMixin],
   mounted() {
-    this.$nextTick(() => {
-      this.$scroll = new iScroll(
-        this.$el,
-        Object.assign(
-          {
-            zoom: true
-          },
-          this.options
-        )
-      );
+    this.init(iScroll, {
+      zoom: true
     });
   }
 };

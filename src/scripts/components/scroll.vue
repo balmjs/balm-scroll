@@ -19,9 +19,7 @@ export default {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.$scroll = new iScroll(this.$el, Object.assign({}, this.options));
-    });
+    this.init(iScroll);
   }
 };
 </script>
