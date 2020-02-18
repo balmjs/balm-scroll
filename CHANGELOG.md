@@ -1,5 +1,14 @@
 # BalmScroll ChangeLog
 
+## 0.6.0 (2020.02.18)
+
+### Chores
+
+- clean core code
+- update docs
+
+---
+
 ## 0.5.3 (2019.10.29)
 
 ### Bugfix

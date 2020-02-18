@@ -29,6 +29,7 @@ export default {
     },
     pullAction: Function,
     pullDownAction: Function,
+    pullUpAction: Function,
     scrollEnabled: {
       type: Boolean,
       default: true
