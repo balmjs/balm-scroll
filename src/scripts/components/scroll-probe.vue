@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="[
-      'ui-scroll-probe ui-scroll--wrapper',
-      { 'ui-scroll--disabled': !scrollEnabled }
-    ]"
-  >
+  <div :class="['ui-scroll-probe', wrapperClassName]">
     <div class="ui-scroll--scroller">
       <div
         v-if="pullDownAction"

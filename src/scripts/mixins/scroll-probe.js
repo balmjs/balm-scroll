@@ -27,13 +27,7 @@ export default {
       type: Number,
       default: 5
     },
-    pullAction: Function,
-    pullDownAction: Function,
-    pullUpAction: Function,
-    scrollEnabled: {
-      type: Boolean,
-      default: true
-    }
+    pullAction: Function
   },
   data() {
     return {
@@ -41,11 +35,13 @@ export default {
       pullDownLabelEl: null,
       pullDownOffset: 0,
       pullUpEl: null,
-      pullUpLabelEl: null,
-      pullUpOffset: 0,
-      currentMaxScrollY: 0,
-      isScrolling: false
+      pullUpLabelEl: null
     };
+  },
+  watch: {
+    pullUpLabel(val) {
+      this.pullUpLabelEl.innerHTML = val;
+    }
   },
   mounted() {
     if (this.pullDownAction) {
@@ -66,17 +62,6 @@ export default {
     }
   },
   methods: {
-    initEvent() {
-      // console.log(`before maxScrollY: ${this.$scroll.maxScrollY}`);
-      this.$scroll.maxScrollY += this.pullUpOffset;
-      this.currentMaxScrollY = this.$scroll.maxScrollY;
-      // console.log(`after maxScrollY: ${this.$scroll.maxScrollY}`);
-
-      this.$scroll.on('scrollStart', this.onScrollStart);
-      this.$scroll.on('scroll', this.onScroll);
-      this.$scroll.on('scrollEnd', this.onScrollEnd);
-      this.$scroll.on('refresh', this.onRefresh);
-    },
     _isPullDown(className, LogicalNot = false) {
       return (
         this.pullDownEl &&
@@ -93,29 +78,7 @@ export default {
           : this.pullUpEl.classList.contains(className))
       );
     },
-    // TODO
-    // onBeforeScrollStart() {},
-    // onScrollCancel() {},
-    onScrollStart() {
-      if (this.$scroll.y === this.$scroll.startY) {
-        this.isScrolling = true;
-      }
-
-      if (this.debug) {
-        console.log('--------onScrollStart--------');
-        console.log(`start-y: ${this.$scroll.y}`);
-      }
-    },
-    onScrollEnd() {
-      let currentY = this.$scroll.y;
-
-      if (this.debug) {
-        console.log('--------onScrollEnd--------');
-        console.log(`current position: ${currentY}`);
-        console.log(`last direction: ${this.$scroll.directionY}`);
-        console.log(`maxScrollY: ${this.$scroll.maxScrollY}`);
-      }
-
+    _onScrollEnd(currentY) {
       let resume =
         this._isPullDown(UI_SCROLL.className.flip, true) &&
         currentY > this.$scroll.options.startY;
@@ -146,8 +109,6 @@ export default {
           this.debug && console.log(`after pull up action: ${currentY}`);
         }
       }
-
-      this.isScrolling = false;
     },
     onScroll() {
       let canScroll = true;
@@ -176,7 +137,7 @@ export default {
       } else if (pullDownToRefresh) {
         this.pullDownEl.classList.add(UI_SCROLL.className.flip);
         this.pullDownLabelEl.innerHTML = this.releaseLabel;
-      } else if (this.scrollEnabled) {
+      } else if (this.isScrollEnabled) {
         if (pullUp) {
           this.pullUpEl.classList.remove(UI_SCROLL.className.flip);
           this.pullUpLabelEl.innerHTML = this.pullUpLabel;

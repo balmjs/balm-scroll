@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-scroll-infinite ui-scroll--wrapper">
+  <div :class="['ui-scroll-infinite', wrapperClassName]">
     <div class="ui-scroll--scroller">
       <slot></slot>
     </div>

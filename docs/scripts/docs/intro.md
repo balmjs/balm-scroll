@@ -29,11 +29,27 @@ yarn add balm-scroll
 
 #### 2.2 Js (Edit `my-project/app/scripts/main.js`)
 
+Default Usage
+
 ```js
 import Vue from 'vue';
 import BalmScroll from 'balm-scroll';
 
 Vue.use(BalmScroll);
+```
+
+Standalone Usage
+
+```js
+import Vue from 'vue';
+import UiScroll from 'balm-scroll/components/scroll';
+// OR
+// import UiScrollLite from 'balm-scroll/components/scroll-lite';
+// import UiScrollProbe from 'balm-scroll/components/scroll-probe';
+// import UiScrollZoom from 'balm-scroll/components/scroll-zoom';
+// import UiScrollInfinite from 'balm-scroll/components/scroll-infinite';
+
+Vue.use(UiScroll);
 ```
 
 #### 2.3 Vue (Edit a vue component: `my-project/app/scripts/views/demos/hello.vue`)
@@ -62,6 +78,8 @@ export default {
 
 Download [`pull-icon@2x.png`](https://iscroll.balmjs.com/balm-scroll-images.zip) and extract to `/path/to/my-project/app/images`.
 
+> ⚠️: Applicable only for the `<ui-scroll-probe>`
+
 ### 3. Configuring
 
 #### 3.1 The many faces of [iScroll](https://github.com/cubiq/iscroll/#the-many-faces-of-iscroll)
@@ -84,29 +102,30 @@ Download [`pull-icon@2x.png`](https://iscroll.balmjs.com/balm-scroll-images.zip)
 
 ##### Common props
 
-| Name      | Type     | Default | Description     |
-| --------- | -------- | ------- | --------------- |
-| `options` | `object` | `{}`    | iScroll options |
+| Name             | Type                          | Default | Description                                   |
+| ---------------- | ----------------------------- | ------- | --------------------------------------------- |
+| `options`        | `object`                      | `{}`    | iScroll options                               |
+| `excludes`       | `array`                       |         | Excludes for `touchmove` event preventDefault |
+| `pullDownAction` | `function(refresh: Function)` | `null`  | Pull down action                              |
+| `pullUpAction`   | `function(refresh: Function)` | `null`  | Pull up action                                |
+| `pullOffset`     | `number`                      | `5`     | Down and up offset for triggering pull action |
+| `scrollEnabled`  | `boolean`                     | `true`  | Load more data controls                       |
 
-##### `<ui-scroll-probe>` props
+##### `<ui-scroll-probe>` extra props
 
-| Name             | Type                          | Default                  | Description                                   |
-| ---------------- | ----------------------------- | ------------------------ | --------------------------------------------- |
-| `pullDownLabel`  | `string`                      | `'Pull down to refresh'` | Pull down label                               |
-| `pullUpLabel`    | `string`                      | `'Pull up to load more'` | Pull up label                                 |
-| `releaseLabel`   | `string`                      | `'Release to update'`    | Release label                                 |
-| `loadingLabel`   | `string`                      | `'Loading...'`           | Loading label                                 |
-| `pullDownY`      | `number`                      | `5`                      | Pull down Y position                          |
-| `pullAction`     | `function(scroll: object)`    | `null`                   | Scroll action                                 |
-| `pullDownAction` | `function(refresh: Function)` | `null`                   | Pull down action                              |
-| `pullUpAction`   | `function(refresh: Function)` | `null`                   | Pull up action                                |
-| `excludes`       | `array`                       |                          | Excludes for `touchmove` event preventDefault |
-| `scrollEnabled`  | `boolean`                     | `true`                   | Load more data controls                       |
+| Name            | Type                       | Default                  | Description          |
+| --------------- | -------------------------- | ------------------------ | -------------------- |
+| `pullDownLabel` | `string`                   | `'Pull down to refresh'` | Pull down label      |
+| `pullUpLabel`   | `string`                   | `'Pull up to load more'` | Pull up label        |
+| `releaseLabel`  | `string`                   | `'Release to update'`    | Release label        |
+| `loadingLabel`  | `string`                   | `'Loading...'`           | Loading label        |
+| `pullDownY`     | `number`                   | `5`                      | Pull down Y position |
+| `pullAction`    | `function(scroll: object)` | `null`                   | Scroll action        |
 
 ⚠️ **Special refresh function for first loaded**
 
 ```html
-<ui-scroll-probe ref="iScroll" :pullUpAction="pullUpAction"></ui-scroll-probe>
+<ui-scroll ref="iScroll" :pullUpAction="pullUpAction"></ui-scroll>
 ```
 
 ```js

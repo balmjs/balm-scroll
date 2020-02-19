@@ -1,10 +1,11 @@
 # BalmScroll ChangeLog
 
-## 0.6.0 (2020.02.18)
+## 0.6.0 (2020.02.19)
 
 ### Chores
 
 - clean core code
+- fix custom event bug for all components
 - update docs
 
 ---

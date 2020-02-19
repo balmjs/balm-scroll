@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-scroll-zoom ui-scroll--wrapper">
+  <div :class="['ui-scroll-zoom', wrapperClassName]">
     <div class="ui-scroll--scroller">
       <slot></slot>
     </div>

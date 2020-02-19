@@ -12,11 +12,7 @@
     >
       <ul id="datalist">
         <li v-for="i in list" :key="i">
-          <a
-            href="https://github.com/"
-            style="display: block;color: inherit;"
-            @click="test"
-          >
+          <a style="display: block;color: inherit;" @click="test">
             <img :src="`https://picsum.photos/120?random=${i}`" />
             <figcaption>Pretty row {{ i }}</figcaption>
           </a>
@@ -37,7 +33,9 @@ export default {
   data() {
     return {
       list: 0,
-      scrollOptions: isIOS ? { click: true } : {},
+      scrollOptions: isIOS
+        ? { click: true, mouseWheel: true }
+        : { mouseWheel: true },
       scrollEnabled: true
     };
   },
