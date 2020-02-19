@@ -48,7 +48,8 @@ module.exports = {
   },
   images: {
     defaultPlugins: {
-      png: false
+      png: false,
+      jpeg: false
     }
   },
   extras: {
