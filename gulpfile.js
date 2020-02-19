@@ -26,7 +26,7 @@ balm.go(mix => {
       // get fonts for docs
       mix.copy('node_modules/balm-ui/fonts/*', 'docs/fonts');
     } else {
-      if (balm.config.isProd) {
+      if (mix.env.isProd) {
         // clear individual
         mix.remove(['./components']);
         // build individual

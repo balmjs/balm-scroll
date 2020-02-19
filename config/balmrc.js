@@ -46,6 +46,11 @@ module.exports = {
       ? [path.resolve(__dirname, '../src/scripts')]
       : []
   },
+  images: {
+    defaultPlugins: {
+      png: false
+    }
+  },
   extras: {
     includes: ['CNAME', 'balm-scroll-images.zip']
   },
