@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--scrollbars">
+  <div class="scroll-demo demo--scrollbars">
     <header class="balm-scroll--header">Balm Scroll: scrollbars</header>
     <ui-scroll ref="iScroll" :options="options">
       <ul>

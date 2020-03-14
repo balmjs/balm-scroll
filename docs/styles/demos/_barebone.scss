@@ -1,3 +1,5 @@
+@use '../global/index' as global;
+
 .demo--barebone {
   .ui-scroll--wrapper {
     position: relative;
@@ -11,11 +13,11 @@
     text-size-adjust: none;
   }
   .ui-scroll--scroller {
-    padding: rem(10);
+    padding: global.rem(10);
     /* Put the scroller into the HW Compositing layer right from the start */
     transform: translateZ(0);
   }
   p {
-    margin-bottom: rem(10);
+    margin-bottom: global.rem(10);
   }
 }

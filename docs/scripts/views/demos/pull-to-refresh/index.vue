@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--pull2refresh">
+  <div class="scroll-demo demo--pull2refresh">
     <header class="balm-scroll--header">Balm Scroll: pull to refresh</header>
     <ui-scroll-probe
       v-if="list"

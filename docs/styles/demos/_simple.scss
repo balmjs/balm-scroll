@@ -1,15 +1,14 @@
+@use '../global/index' as global;
+
 .demo--simple {
   width: 100%;
   height: 100%;
   .balm-scroll--header {
     flex-direction: column;
     justify-content: space-around;
-    height: rem(88);
+    height: global.rem(88);
   }
   .mdc-tab__content {
     font-size: 14px;
-  }
-  .ui-scroll--wrapper {
-    top: rem(88);
   }
 }

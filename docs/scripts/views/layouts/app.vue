@@ -5,8 +5,16 @@
     </template>
     <template v-else>
       <!-- header -->
-      <ui-top-app-bar class="balmui-head" contentSelector=".balmui-body" navId="balmui-menu">
-        <router-link to="/" :class="['catalog-title', $themeColor('on-primary')]">Balm Scroll</router-link>
+      <ui-top-app-bar
+        class="balmui-head"
+        contentSelector=".balmui-body"
+        navId="balmui-menu"
+      >
+        <router-link
+          to="/"
+          :class="['catalog-title', $themeColor('on-primary')]"
+          >Balm Scroll</router-link
+        >
         <template #toolbar="{ itemClass }">
           <a :class="itemClass" href="https://github.com/balmjs/balm-scroll">
             <svg-github></svg-github>
@@ -15,27 +23,34 @@
       </ui-top-app-bar>
       <!-- content -->
       <main class="balmui-body">
-        <ui-dismissible-drawer v-model="open" class="balmui-menu" menuSelector="#balmui-menu">
+        <ui-drawer
+          type="dismissible"
+          v-model="open"
+          class="balmui-menu"
+          navId="balmui-menu"
+        >
           <ui-drawer-content>
-            <ui-list-nav class="catalog-list">
-              <template #default="{ itemClass, activeClass }">
+            <ui-nav class="catalog-list">
+              <template #default="{ itemClass }">
                 <h3 :class="$textColor('primary', 'light')">Guide</h3>
                 <router-link
                   :class="[itemClass, $textColor('primary', 'light')]"
                   to="/"
-                >Introduction</router-link>
+                  >Introduction</router-link
+                >
                 <h3 :class="$textColor('primary', 'light')">Demos</h3>
                 <template v-for="(item, index) in menu">
                   <router-link
                     :key="`item${index}`"
                     :class="[itemClass, $textColor('primary', 'light')]"
                     :to="{ name: item.name }"
-                  >{{ item.path }}</router-link>
+                    >{{ item.path }}</router-link
+                  >
                 </template>
               </template>
-            </ui-list-nav>
+            </ui-nav>
           </ui-drawer-content>
-        </ui-dismissible-drawer>
+        </ui-drawer>
 
         <div :class="[$tt('body1'), 'balmui-content']">
           <div :class="$tt('body2')">

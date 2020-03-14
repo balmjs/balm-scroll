@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--snap">
+  <div class="scroll-demo demo--snap">
     <header class="balm-scroll--header">Balm Scroll: snap</header>
     <ui-scroll ref="iScroll" :options="options">
       <ul>

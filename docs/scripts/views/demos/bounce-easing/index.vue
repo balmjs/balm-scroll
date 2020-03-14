@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--bounce-easing">
+  <div class="scroll-demo demo--bounce-easing">
     <header class="balm-scroll--header">Balm Scroll: bounce easing</header>
     <ui-scroll :options="options">
       <ul>

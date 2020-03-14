@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--simple">
+  <div class="scroll-demo demo--simple">
     <header class="balm-scroll--header">
       <div>Balm Scroll: simple</div>
       <ui-tab-bar v-model="active">

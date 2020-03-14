@@ -1,7 +1,7 @@
-@import 'global/index';
-@import 'layouts/index';
+@use './global/index' as global;
+@use './layouts/main';
 // components
-@import 'components/typography';
-@import 'components/markdown';
+@use 'components/typography';
+@use 'components/markdown';
 // demos
-@import 'demos/index';
+@use 'demos/index' as demos;

@@ -1,17 +1,6 @@
+@use '../global/index' as global;
+
 .demo--pull2refresh {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  header,
-  footer {
-    flex-shrink: 0;
-  }
-  .ui-scroll--wrapper {
-    position: relative;
-    height: calc(100% - #{rem(128)});
-    bottom: initial;
-    top: initial;
-  }
   #datalist li {
     height: 200px;
     padding: 20px 40px;

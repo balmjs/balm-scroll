@@ -1,3 +1,5 @@
+$rem: 37.5;
+
 @function rem($size) {
   @return ($size / $rem) + rem;
 }

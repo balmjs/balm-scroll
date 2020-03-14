@@ -1,5 +1,5 @@
-@import 'reset';
-@import 'var';
-@import 'vendor';
-@import 'functions';
-@import './base';
+@use './reset';
+@use './vendors';
+@forward './vars';
+@forward './functions';
+@use './base';

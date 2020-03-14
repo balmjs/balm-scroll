@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--horizontal">
+  <div class="scroll-demo demo--horizontal">
     <header class="balm-scroll--header">Balm Scroll: horizontal</header>
     <ui-scroll ref="iScroll" :options="options">
       <ul>

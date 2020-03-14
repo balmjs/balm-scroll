@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--minimap">
+  <div class="scroll-demo demo--minimap">
     <ui-scroll ref="iScroll" :options="options"></ui-scroll>
 
     <div id="minimap">

@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--parallax">
+  <div class="scroll-demo demo--parallax">
     <ui-scroll :options="options"></ui-scroll>
 
     <div class="starfield" id="starfield1">

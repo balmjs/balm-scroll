@@ -1,5 +1,5 @@
 <template>
-  <div class="demo--infinite">
+  <div class="scroll-demo demo--infinite">
     <header class="balm-scroll--header">Balm Scroll: infinite</header>
     <ui-scroll-infinite ref="iScroll" id="scroller" :options="options">
       <ul>
